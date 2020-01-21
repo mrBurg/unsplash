@@ -1,2 +1,2 @@
-# unsplash
-Unsplash Client
+# Unsplash Client
+Unsplash Client for Web Academy
