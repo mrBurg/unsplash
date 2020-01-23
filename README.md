@@ -1,12 +1,8 @@
-# TypeScript Next.js example
+# Unsplash Client
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+Unsplash Client for Web Academy
 
-## Deploy your own
-
-Deploy the example using [ZEIT Now](https://zeit.co/now):
-
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/zeit/next.js/tree/canary/examples/with-typescript)
+This is a project 'Unsplash Client' of Next.js with TypeScript.
 
 ## How to use it?
 
@@ -20,15 +16,6 @@ npm init next-app --example with-typescript with-typescript-app
 yarn create next-app --example with-typescript with-typescript-app
 ```
 
-### Download manually
-
-Download the example:
-
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-typescript
-cd with-typescript
-```
-
 Install it and run:
 
 ```bash
@@ -37,12 +24,6 @@ npm run dev
 # or
 yarn
 yarn dev
-```
-
-Deploy it to the cloud with [now](https://zeit.co/now) ([download](https://zeit.co/download)):
-
-```bash
-now
 ```
 
 ## Notes
