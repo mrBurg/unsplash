@@ -1,9 +1,16 @@
-$bgc: black;
-
-body {
-  background-color: $bgc;
+.red {
+  color: red;
 }
 
-.red {
-  background-color: red;
+.green {
+  color: green;
+}
+
+.blue {
+  color: blue;
+}
+
+.button {
+  cursor: pointer;
+  padding: 0.5em;
 }
