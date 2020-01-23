@@ -1,8 +1,7 @@
 import NextApp from 'next/app';
 import { Provider } from 'mobx-react';
 
-import { Store /* fetchInitialStoreState */ } from './../stores/store';
-import Index from './index';
+import { Store, fetchInitialStoreState } from './../stores/store';
 
 import './../src/scss/grid.scss';
 import style from './../src/scss/style.module.scss';
@@ -20,26 +19,34 @@ class App extends NextApp {
     store: new Store()
   };
 
-  // Fetching serialized(JSON) store state
-  /* static async getInitialProps(appContext: any): Promise<any> {
-    const appProps = await App.getInitialProps(appContext);
+  static async getInitialProps(appContext: any) {
+    const appProps = await NextApp.getInitialProps(appContext);
     const initialStoreState = await fetchInitialStoreState();
+
+    console.info(appProps, initialStoreState);
 
     return {
       ...appProps,
       initialStoreState
     };
-  } */
+  }
 
-  // Hydrate serialized state to store
-  /* static getDerivedStateFromProps(props: any, state: any) {
-    // state.store.hydrate(props.initialStoreState);
+  static getDerivedStateFromProps(props: any, state: any) {
+    state.store.hydrate(props.initialStoreState);
+
+    console.info(props);
+
     return state;
-  } */
+  }
 
   render() {
+    const { Component, pageProps } = this.props;
+
+    console.info(this.props);
+
     return (
       <Provider store={this.state.store}>
+        <Component {...pageProps} />
         <table>
           <tbody>
             <tr>
@@ -56,7 +63,6 @@ class App extends NextApp {
             </tr>
           </tbody>
         </table>
-        <Index />
       </Provider>
     );
   }

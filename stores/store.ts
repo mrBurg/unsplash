@@ -11,19 +11,19 @@ export class Store {
   @observable lastUpdate = 0;
   @observable light = false;
 
-  /* hydrate(serializedStore: any) {
+  hydrate(serializedStore: any) {
     this.lastUpdate =
       serializedStore.lastUpdate != null
         ? serializedStore.lastUpdate
         : Date.now();
     this.light = !!serializedStore.light;
-  } */
+  }
 
   @action start = () => {
-    this.timer = setInterval(() => {
+    /* this.timer = setInterval(() => {
       this.lastUpdate = Date.now();
       this.light = true;
-    }, 1000);
+    }, 1000); */
   };
 
   stop = () => clearInterval(this.timer);
