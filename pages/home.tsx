@@ -1,39 +1,7 @@
 import React from 'react';
-import Head from 'next/head';
-// import Nav from '../components/nav';
-
-import style from './../src/scss/style.module.scss';
-
-function clickHandler(data, event) {
-  console.info(data, event);
-}
 
 const Home = () => (
   <div>
-    <div>
-      <div className={style.red} onClick={event => clickHandler('red', event)}>
-        red
-      </div>
-      <div
-        className={style.green}
-        onClick={event => clickHandler('green', event)}
-      >
-        green
-      </div>
-      <div
-        className={style.blue}
-        onClick={event => clickHandler('blue', event)}
-      >
-        blue
-      </div>
-    </div>
-    <Head>
-      <title>Home</title>
-      <link rel='icon' href='/favicon.ico' />
-    </Head>
-
-    {/* <Nav /> */}
-
     <div className='hero'>
       <h1 className='title'>Welcome to Next.js!</h1>
       <p className='description'>

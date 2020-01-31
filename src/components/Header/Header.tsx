@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { Routes } from './../Routes';
+import { Routes } from '../Routes';
 
 import style from './header.module.scss';
 
