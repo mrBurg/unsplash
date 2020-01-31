@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Nav from '../components/nav';
+// import Nav from '../components/nav';
 
 import style from './../src/scss/style.module.scss';
 
@@ -32,7 +32,7 @@ const Home = () => (
       <link rel='icon' href='/favicon.ico' />
     </Head>
 
-    <Nav />
+    {/* <Nav /> */}
 
     <div className='hero'>
       <h1 className='title'>Welcome to Next.js!</h1>

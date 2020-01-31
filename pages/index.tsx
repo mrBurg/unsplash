@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Page from '../components/Page';
+// import Page from '../components/Page';
 
-export default class Counter extends Component {
+class Index extends Component {
   render() {
-    return <Page title='Index Page' linkTo='/other' />;
+    // return <Page title='Index Page' linkTo='/other' />;
+    return <h1>Index</h1>;
   }
 }
+
+export default Index;
