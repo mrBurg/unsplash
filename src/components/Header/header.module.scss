@@ -1,6 +1,9 @@
+@import './../../scss/constants.scss';
+
 .header {
-  background-color: #ccc;
+  align-items: center;
+  background-color: $header-background;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0.5em;
 }

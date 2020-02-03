@@ -1,12 +1,12 @@
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
-import fetch from 'isomorphic-unfetch';
+// import fetch from 'isomorphic-unfetch';
 import { ReactElement } from 'react';
 import { Provider } from 'mobx-react';
 
-import Store, { fetchInitialStoreState } from '../src/stores/store';
+import Store /* fetchInitialStoreState */ from '../src/stores/store';
 
 import './../src/scss/grid.scss';
-import style from './../src/scss/style.module.scss';
+// import style from './../src/scss/style.module.scss';
 
 import { Header } from '../src/components/Header';
 
@@ -23,29 +23,29 @@ class App extends NextApp<IAppProps> {
     appContext: AppContext
   ): Promise<AppInitialProps> {
     const appProps = NextApp.getInitialProps(appContext);
-    const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-    const data = await res.json();
+    // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
+    // const data = await res.json();
 
-    const initialStoreState = await fetchInitialStoreState();
+    // const initialStoreState = await fetchInitialStoreState();
 
-    console.info(initialStoreState, 'getDerivedStateFromProps');
+    // console.info(initialStoreState, 'getDerivedStateFromProps');
 
     return {
-      shows: data.map((entry: any) => entry.show),
-      ...initialStoreState,
+      // shows: data.map((entry: any) => entry.show),
+      // ...initialStoreState,
       ...appProps
     };
   }
 
-  static getDerivedStateFromProps(props: any, state: any) {
-    // state.store.hydrate(props.initialStoreState);
+  // static getDerivedStateFromProps(props: any, state: any) {
+  // state.store.hydrate(props.initialStoreState);
 
-    console.info(props, 'getDerivedStateFromProps');
+  // console.info(props, 'getDerivedStateFromProps');
 
-    return state;
-  }
+  // return state;
+  // }
 
-  private renderTable(data: any) {
+  /* private renderTable(data: any) {
     function clickHandler(data: any, event: any) {
       console.info(data, event);
     }
@@ -87,17 +87,17 @@ class App extends NextApp<IAppProps> {
         </tbody>
       </table>
     );
-  }
+  } */
 
   render(): ReactElement {
-    const { Component, pageProps, shows } = this.props;
+    // const { Component, pageProps } = this.props;
 
     return (
       <Provider store={this.state.store}>
-        <h1>{`${process.env.HOST}:${process.env.PORT}`}</h1>
+        {/* <h1>{`${process.env.HOST}:${process.env.PORT}`}</h1> */}
         <Header />
-        <Component {...pageProps} />
-        {this.renderTable(shows)}
+        {/* <Component {...pageProps} /> */}
+        {/* {this.renderTable(shows)} */}
       </Provider>
     );
   }

@@ -1,13 +1,21 @@
-import { ReactElement } from 'react';
-
-import { Routes } from '../Routes';
+import Link from 'next/link';
+import { ReactElement, FunctionComponent } from 'react';
 
 import style from './header.module.scss';
 
-const Header = (): ReactElement => {
+import Nav, { URLS } from '../Nav';
+import Search from '../Search';
+
+const Header: FunctionComponent = (): ReactElement => {
   return (
     <header className={style.header}>
-      <Routes />
+      <Link href={URLS.HOME}>
+        <a>
+          <img src='/images/logo.png' alt='Logo' />
+        </a>
+      </Link>
+      <Search />
+      <Nav />
     </header>
   );
 };
