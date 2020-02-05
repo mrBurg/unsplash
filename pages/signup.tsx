@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Home = () => (
+const Signup = () => (
   <div>
     <div className='hero'>
       <h1 className='title'>Welcome to Next.js!</h1>
@@ -76,4 +76,4 @@ const Home = () => (
   </div>
 );
 
-export default Home;
+export default Signup;

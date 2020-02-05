@@ -1,17 +1,5 @@
-.red {
-  background-color: red;
-}
+@import './constants.scss';
 
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.button {
-  border-radius: 0.5em;
-  cursor: pointer;
-  padding: 0.5em;
+.grid {
+  background-color: $clear;
 }

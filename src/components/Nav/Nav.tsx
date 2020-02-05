@@ -6,8 +6,8 @@ import { routes, IRouter } from './routes';
 
 type TLink = ReactElement | null;
 
-let Links: Function = (): Array<TLink> => {
-  return routes.map(
+let Links: Function = (): Array<TLink> =>
+  routes.map(
     (route: IRouter, index: number): TLink => {
       let { router, isProtected, alias, title } = route;
 
@@ -22,14 +22,11 @@ let Links: Function = (): Array<TLink> => {
       return null;
     }
   );
-};
 
-const Nav: FunctionComponent = (): ReactElement => {
+export const Nav: FunctionComponent = (): ReactElement => {
   return (
     <nav>
       <Links />
     </nav>
   );
 };
-
-export { Nav };

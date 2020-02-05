@@ -1,15 +1,17 @@
 @import './../../scss/constants.scss';
 
 .wrapper {
-  border: 1px solid $border-color;
+  border: 1px solid $dark-gray;
   border-radius: 1.2em;
+  display: flex;
   min-width: 30%;
-  padding: 0.2em 1em 0.2em 0.3em;
+  padding: 0.2em;
+  padding-right: 1em;
   transition: all 0.2s;
 }
 
 .blur {
-  background-color: $input-background;
+  background-color: $light-gray;
 }
 
 .focus {
@@ -22,18 +24,20 @@
   border-radius: 50%;
   cursor: pointer;
   height: 32px;
-  margin-right: 0.5em;
   width: 32px;
 }
 
 .icon {
+  background-image: url('/images/icons_32x32.svg');
   background-position: 0 0;
-  vertical-align: middle;
+  height: 100%;
+  width: 100%;
 }
 
 .input {
   background-color: $clear;
   border: none;
+  flex-grow: 1;
   font-size: 1em;
   vertical-align: middle;
 }

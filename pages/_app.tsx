@@ -6,15 +6,10 @@ import { Provider } from 'mobx-react';
 import Store /* fetchInitialStoreState */ from '../src/stores/store';
 
 import './../src/scss/grid.scss';
-// import style from './../src/scss/style.module.scss';
 
-import { Header } from '../src/components/Header';
+import Header from '../src/components/Header';
 
-interface IAppProps {
-  shows: Array<any>;
-}
-
-class App extends NextApp<IAppProps> {
+export default class App extends NextApp {
   state = {
     store: new Store()
   };
@@ -23,84 +18,42 @@ class App extends NextApp<IAppProps> {
     appContext: AppContext
   ): Promise<AppInitialProps> {
     const appProps = NextApp.getInitialProps(appContext);
-    // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-    // const data = await res.json();
 
-    // const initialStoreState = await fetchInitialStoreState();
+    // const initialStoreState = fetchInitialStoreState();
 
-    // console.info(initialStoreState, 'getDerivedStateFromProps');
+    /* return {
+      initialStoreState,
+      ...appProps
+    }; */
 
     return {
-      // shows: data.map((entry: any) => entry.show),
-      // ...initialStoreState,
+      myData: [0, 1, 2],
       ...appProps
     };
   }
 
-  // static getDerivedStateFromProps(props: any, state: any) {
-  // state.store.hydrate(props.initialStoreState);
+  //@ts-ignore
+  static getDerivedStateFromProps(props: any, state: any) {
+    // console.info(props, 'Props getDerivedStateFromProps');
+    // console.info(state, 'State getDerivedStateFromProps');
 
-  // console.info(props, 'getDerivedStateFromProps');
-
-  // return state;
-  // }
-
-  /* private renderTable(data: any) {
-    function clickHandler(data: any, event: any) {
-      console.info(data, event);
-    }
-
-    return (
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <div style={{ display: 'flex' }}>
-                <div
-                  className={`${style.button} ${style.green}`}
-                  onClick={event => clickHandler('green', event)}
-                >
-                  &lt;&lt;&lt;
-                </div>
-                <div
-                  className={`${style.button} ${style.red}`}
-                  onClick={event => clickHandler('red', event)}
-                >
-                  &lt;&lt;&gt;&gt;
-                </div>
-                <div
-                  className={`${style.button} ${style.blue}`}
-                  onClick={event => clickHandler('blue', event)}
-                >
-                  &gt;&gt;&gt;
-                </div>
-              </div>
-            </td>
-          </tr>
-          {data.map((show: any, index: number) => {
-            return (
-              <tr key={index}>
-                <td>{show.name}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
-  } */
+    return state;
+  }
 
   render(): ReactElement {
-    // const { Component, pageProps } = this.props;
+    const { Component, pageProps } = this.props;
+
+    console.info(this.props);
+
+    /* console.warn(
+      `Application rendered at ${process.env.HOST}:${process.env.PORT}`
+    ); */
 
     return (
       <Provider store={this.state.store}>
-        {/* <h1>{`${process.env.HOST}:${process.env.PORT}`}</h1> */}
         <Header />
-        {/* <Component {...pageProps} /> */}
-        {/* {this.renderTable(shows)} */}
+        <Component {...pageProps} />
       </Provider>
     );
   }
 }
-
-export default App;

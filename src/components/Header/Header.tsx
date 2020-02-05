@@ -3,15 +3,16 @@ import { ReactElement, FunctionComponent } from 'react';
 
 import style from './header.module.scss';
 
-import Nav, { URLS } from '../Nav';
+import Logo from './../../../static/images/logo.svg';
 import Search from '../Search';
+import Nav, { URLS } from '../Nav';
 
-const Header: FunctionComponent = (): ReactElement => {
+export const Header: FunctionComponent = (): ReactElement => {
   return (
     <header className={style.header}>
       <Link href={URLS.HOME}>
         <a>
-          <img src='/images/logo.png' alt='Logo' />
+          <Logo />
         </a>
       </Link>
       <Search />
@@ -19,5 +20,3 @@ const Header: FunctionComponent = (): ReactElement => {
     </header>
   );
 };
-
-export { Header };

@@ -2,33 +2,47 @@ import { Component, ReactElement, FocusEvent } from 'react';
 
 import style from './search.module.scss';
 
+interface IProps {}
+
+interface IState {
+  background: string;
+}
+
 export class Search extends Component {
-  private searchBackground = style.blur;
+  state: IState = {
+    background: style.blur
+  };
+
+  static getDerivedStateFromProps({}: IProps, state: IState): IState {
+    return state;
+  }
 
   private changeInputBackground = (
     event: FocusEvent<HTMLInputElement>
   ): void => {
+    let background: string;
+
     switch (event.type) {
       case 'focus':
-        this.searchBackground = style.focus;
+        background = style.focus;
         break;
       case 'blur':
-        this.searchBackground = style.blur;
+        background = style.blur;
         break;
+      default:
+        background = style.blur;
     }
 
-    this.forceUpdate();
+    this.setState({
+      background
+    });
   };
 
   render(): ReactElement {
     return (
-      <div className={`${style.wrapper} ${this.searchBackground}`}>
+      <div className={`${style.wrapper} ${this.state.background}`}>
         <button className={style.button}>
-          <img
-            className={style.icon}
-            src='/images/icons_32x32.svg'
-            alt='Search'
-          />
+          <div className={style.icon}></div>
         </button>
         <input
           className={style.input}

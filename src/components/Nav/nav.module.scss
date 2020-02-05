@@ -1,13 +1,13 @@
 @import './../../scss/constants.scss';
 
 .link {
-  color: $link-color;
+  color: $green;
   font-size: 1.2em;
   padding: 0.5em;
   text-decoration: none;
   transition: all 0.2s;
 
   &:hover {
-    color: darken($link-color, 10%);
+    color: $brown;
   }
 }
