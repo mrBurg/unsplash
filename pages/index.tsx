@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import Router from 'next/router';
-import { URLS } from '../src/components/Nav';
+// import Router from 'next/router';
+// import { URLS } from '../src/components/Nav';
+import { inject, observer } from 'mobx-react';
 
-function clickHandler() {
-  Router.push(URLS.SIGNIN);
+interface IStore {}
+
+interface IProps {
+  counter: any;
 }
 
-class Index extends Component {
+@inject('counter')
+@observer
+class Index extends Component<IProps, IStore> {
   render() {
-    console.info(this.props);
+    let { counter, increase, decrease } = this.props.counter;
 
     // let { router } = this.props;
 
@@ -16,12 +21,14 @@ class Index extends Component {
 
     return (
       <div>
-        <p className='result'>this.props.count}</p>
+        <p className='result'>{counter}</p>
         <div className='buttons'>
-          <button className='button blue' onClick={clickHandler}>
+          <button className='button blue' onClick={decrease}>
             &lt;&lt;&lt;
           </button>
-          <button className='button green'>&gt;&gt;&gt;</button>
+          <button className='button green' onClick={increase}>
+            &gt;&gt;&gt;
+          </button>
         </div>
         <style jsx>{`
           .result,
