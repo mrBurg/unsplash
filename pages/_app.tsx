@@ -6,10 +6,13 @@ import { Provider } from 'mobx-react';
 import './../src/scss/grid.scss';
 
 import { stores } from '../src/stores';
+import { getFromLocalStorage } from '../src/utils';
 
 import Header from '../src/components/Header';
 
-interface IState {}
+interface IState {
+  isAuth?: boolean;
+}
 
 interface IProps {}
 
@@ -30,17 +33,31 @@ export default class App extends NextApp<IProps, IState> {
     return state;
   } */
 
+  public componentDidMount(): void {
+    let isAuth = getFromLocalStorage('auth') ? true : false;
+
+    this.setState(
+      //@ts-ignore
+      (state: IState, props: IProps): IState => {
+        return {
+          isAuth
+        };
+      }
+    );
+  }
+
   render(): ReactElement {
+    const { isAuth } = this.state;
     const { Component, pageProps } = this.props;
 
-    console.warn(
+    /* console.warn(
       `Application rendered at ${process.env.HOST}:${process.env.PORT}`
-    );
+    ); */
 
     return (
       <Provider {...stores}>
         <Header />
-        <Component {...pageProps} />
+        <Component {...pageProps} isAuth={isAuth} />
       </Provider>
     );
   }

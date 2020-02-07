@@ -9,9 +9,10 @@ type TLink = ReactElement | null;
 let Links: Function = (): Array<TLink> =>
   routes.map(
     (route: IRouter, index: number): TLink => {
-      let { router, isProtected, alias, title } = route;
+      //@ts-ignore
+      let { router, isHidden, alias, title } = route;
 
-      if (!isProtected) {
+      if (!isHidden) {
         return (
           <Link key={index} href={router} as={alias}>
             <a className={style.link}>{title}</a>

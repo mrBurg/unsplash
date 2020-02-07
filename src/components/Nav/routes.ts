@@ -10,23 +10,25 @@ export interface IRouter {
   alias: string;
   title: string;
   isProtected?: boolean;
+  isHidden?: boolean;
 }
 
 export const routes: Array<IRouter> = [
-  {
-    router: URLS.SIGNUP,
-    alias: 'signup',
-    title: 'Signup'
-  },
-  {
-    router: URLS.SIGNIN,
-    alias: 'signin',
-    title: 'Signin'
-  },
   {
     router: URLS.USER_PAGE,
     isProtected: true,
     alias: 'user',
     title: 'User'
+  },
+  {
+    router: URLS.SIGNUP,
+    alias: 'signup',
+    title: 'Signup',
+    isHidden: true
+  },
+  {
+    router: URLS.SIGNIN,
+    alias: 'signin',
+    title: 'Signin'
   }
 ];

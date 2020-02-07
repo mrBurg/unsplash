@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-// import Router from 'next/router';
-// import { URLS } from '../src/components/Nav';
+import Router from 'next/router';
+import { URLS } from '../src/components/Nav';
 import { inject, observer } from 'mobx-react';
 
-interface IStore {}
+interface IState {}
 
 interface IProps {
   counter: any;
@@ -11,13 +11,17 @@ interface IProps {
 
 @inject('counter')
 @observer
-class Index extends Component<IProps, IStore> {
+class Index extends Component<IProps, IState> {
+  public componentDidMount(): void {
+    let { isAuth }: any = this.props;
+
+    if (!isAuth) {
+      Router.push(URLS.SIGNIN);
+    }
+  }
+
   render() {
     let { counter, increase, decrease } = this.props.counter;
-
-    // let { router } = this.props;
-
-    // router.push(URLS.SIGNIN);
 
     return (
       <div>
