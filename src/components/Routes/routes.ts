@@ -1,16 +1,16 @@
-export enum URLS {
-  HOME = '/',
-  SIGNUP = '/signup',
-  SIGNIN = '/signin',
-  USER_PAGE = '/user'
-}
-
 export interface IRouter {
   router: URLS;
   alias: string;
   title: string;
   isProtected?: boolean;
   isHidden?: boolean;
+}
+
+export enum URLS {
+  HOME = '/',
+  SIGNUP = '/signup',
+  SIGNIN = '/signin',
+  USER_PAGE = '/user'
 }
 
 export const routes: Array<IRouter> = [

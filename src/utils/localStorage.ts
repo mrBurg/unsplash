@@ -1,9 +1,12 @@
-export async function setToLocalStorage(key: string, data: any): Promise<void> {
-  window.localStorage.setItem(key, data);
+export async function setToLocalStorage(
+  key: string,
+  values: string
+): Promise<void> {
+  window.localStorage.setItem(key, values);
 }
 
-export function getFromLocalStorage(key: string): string | null {
-  return window.localStorage.getItem(key);
+export function getFromLocalStorage(key?: string): string | null {
+  return window.localStorage.getItem(key || '') || null;
 }
 
 export function removeItemFromLocalStorage(key: string): void {

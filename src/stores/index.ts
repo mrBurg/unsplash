@@ -1,5 +1,15 @@
-import Counter from './counter';
+import AuthStore from './Auth';
+import Counter from './Counter';
+
+export enum STORE_IDS {
+  AUTH = 'auth',
+  COUNTER = 'counter'
+}
+
+const auth = new AuthStore();
+const counter = new Counter();
 
 export const stores = {
-  counter: new Counter()
+  [STORE_IDS.AUTH]: auth,
+  [STORE_IDS.COUNTER]: counter
 };

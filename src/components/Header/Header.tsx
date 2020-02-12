@@ -3,9 +3,10 @@ import { ReactElement, FunctionComponent } from 'react';
 
 import style from './header.module.scss';
 
-import Logo from './../../../static/images/logo.svg';
+import Logo from './../../images/logo.svg';
+import { URLS } from '../Routes';
 import Search from '../Search';
-import Nav, { URLS } from '../Nav';
+import Nav from '../Nav';
 
 export const Header: FunctionComponent = (): ReactElement => {
   return (

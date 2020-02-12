@@ -1,20 +1,22 @@
 import { observable, action, computed } from 'mobx';
 
 export default class Counter {
-  @observable counter: number = 0;
+  @observable private _counter: number = 0;
 
   @action
   public increase = (): void => {
-    this.counter++;
+    console.info(this._counter);
+    this._counter++;
   };
 
   @action
   public decrease = (): void => {
-    this.counter--;
+    console.info(this._counter);
+    this._counter--;
   };
 
   @computed
   public get value(): string {
-    return 'Counter value ' + this.counter;
+    return `Counter value ${this._counter}`;
   }
 }

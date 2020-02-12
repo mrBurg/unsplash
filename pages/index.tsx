@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import Router from 'next/router';
-import { URLS } from '../src/components/Nav';
+// import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
+import { STORE_IDS } from '../src/stores';
+// import { ApiRequest } from '../src/apis';
+// import { URLS } from '../src/components/Routes';
 
 interface IState {}
 
@@ -9,27 +11,61 @@ interface IProps {
   counter: any;
 }
 
-@inject('counter')
+async function getOauth() {
+  // let URL: string =
+  // 'https://unsplash.com/oauth/authorize?client_id=055022873d112aa5aa5ee75629932fe3b9211adf3c38faec47eda69a5bf919de&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&scope=public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections';
+  // let URL: string = 'https://unsplash.com/oauth/token';
+  // const response = await ApiRequest.get(URL);
+  /* const response = await ApiRequest.get('oauth/authorize', {
+    client_id:
+      '055022873d112aa5aa5ee75629932fe3b9211adf3c38faec47eda69a5bf919de',
+    client_secret:
+      'e0166504a3d3b5e317fe2c5951d4586626881a287c8009d0d3aca3c9dc153fc6',
+    redirect_uri: 'http://localhost:3000/oauth',
+    code: () => {
+      console.info('code');
+    },
+    grant_type: '1'
+  }); */
+  /* const response = await ApiRequest.post(URL, {
+    client_id:
+      '055022873d112aa5aa5ee75629932fe3b9211adf3c38faec47eda69a5bf919de',
+    client_secret:
+      'e0166504a3d3b5e317fe2c5951d4586626881a287c8009d0d3aca3c9dc153fc6',
+    redirect_uri: 'http://localhost:3000/oauth',
+    code: '',
+    grant_type: ''
+  }); */
+  // console.info(response);
+}
+
+@inject(STORE_IDS.COUNTER)
 @observer
 class Index extends Component<IProps, IState> {
   public componentDidMount(): void {
-    let { isAuth }: any = this.props;
-
-    if (!isAuth) {
+    // let { isAuth }: any = this.props;
+    /* if (!isAuth) {
       Router.push(URLS.SIGNIN);
-    }
+    } */
   }
 
   render() {
-    let { counter, increase, decrease } = this.props.counter;
+    console.info('Page Index');
+    let { value, increase, decrease } = this.props.counter;
 
     return (
       <div>
-        <p className='result'>{counter}</p>
+        <p className='result'>{value}</p>
         <div className='buttons'>
           <button className='button blue' onClick={decrease}>
             &lt;&lt;&lt;
           </button>
+          <button className='button blue' onClick={getOauth}>
+            oAuth
+          </button>
+          <a href='https://unsplash.com/oauth/authorize?client_id=055022873d112aa5aa5ee75629932fe3b9211adf3c38faec47eda69a5bf919de&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&scope=public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections'>
+            Login
+          </a>
           <button className='button green' onClick={increase}>
             &gt;&gt;&gt;
           </button>
