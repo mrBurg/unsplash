@@ -1,6 +1,7 @@
 import { Component, ReactElement, FocusEvent } from 'react';
 
 import style from './search.module.scss';
+import { HeaderCtxConsumer } from '../Header';
 
 interface IProps {}
 
@@ -40,18 +41,28 @@ export class Search extends Component {
 
   render(): ReactElement {
     return (
-      <div className={`${style.wrapper} ${this.state.background}`}>
-        <button className={style.button}>
-          <div className={style.icon}></div>
-        </button>
-        <input
-          className={style.input}
-          onFocus={this.changeInputBackground}
-          onBlur={this.changeInputBackground}
-          type='text'
-          placeholder='Search'
-        />
-      </div>
+      <HeaderCtxConsumer>
+        {({ token }) => {
+          if (token) {
+            return (
+              <div className={`${style.wrapper} ${this.state.background}`}>
+                <button className={style.button}>
+                  <div className={style.icon}></div>
+                </button>
+                <input
+                  className={style.input}
+                  onFocus={this.changeInputBackground}
+                  onBlur={this.changeInputBackground}
+                  type='text'
+                  placeholder='Search'
+                />
+              </div>
+            );
+          }
+
+          return null;
+        }}
+      </HeaderCtxConsumer>
     );
   }
 }

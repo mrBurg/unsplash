@@ -1,7 +1,12 @@
-import React from 'react';
+import { createContext } from 'react';
 
-import { ILinkProps } from '../Nav/Nav';
+export interface IHeaderCtx {
+  token: string;
+}
 
-export const HeaderCtx = React.createContext<ILinkProps>({
-  // isAuth: false
+const HeaderCtx = createContext<IHeaderCtx>({
+  token: ''
 });
+
+export const HeaderCtxProvider = HeaderCtx.Provider;
+export const HeaderCtxConsumer = HeaderCtx.Consumer;

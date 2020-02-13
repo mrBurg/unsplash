@@ -6,7 +6,7 @@ import './../../scss/grid.scss';
 
 import { STORE_IDS } from '../../stores';
 import { URLS } from '../Routes';
-import Header from '../Header';
+import Header, { HeaderCtxProvider } from '../Header';
 
 interface IPageProps {
   Component: any;
@@ -21,7 +21,7 @@ export class Page extends Component<IPageProps> {
   public componentDidMount(): void {
     let { auth } = this.props;
 
-    console.info(auth.token);
+    console.info(auth.token, ' <<< Token');
 
     if (!auth.token) {
       Router.push(URLS.SIGNIN);
@@ -29,10 +29,13 @@ export class Page extends Component<IPageProps> {
   }
 
   render(): ReactElement {
-    let { Component, pageProps } = this.props;
+    let { Component, pageProps, auth } = this.props;
+
     return (
       <>
-        <Header />
+        <HeaderCtxProvider value={{ ...auth }}>
+          <Header />
+        </HeaderCtxProvider>
         <Component {...pageProps} />
       </>
     );

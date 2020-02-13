@@ -1,5 +1,5 @@
 export interface IRouter {
-  router: URLS;
+  href: URLS;
   alias: string;
   title: string;
   isProtected?: boolean;
@@ -15,20 +15,20 @@ export enum URLS {
 
 export const routes: Array<IRouter> = [
   {
-    router: URLS.USER_PAGE,
+    href: URLS.USER_PAGE,
     isProtected: true,
     alias: 'user',
     title: 'User'
   },
   {
-    router: URLS.SIGNUP,
+    href: URLS.SIGNUP,
     alias: 'signup',
-    title: 'Signup',
-    isHidden: true
+    title: 'Signup'
   },
   {
-    router: URLS.SIGNIN,
+    href: URLS.SIGNIN,
     alias: 'signin',
-    title: 'Signin'
+    title: 'Signin',
+    isHidden: true
   }
 ];

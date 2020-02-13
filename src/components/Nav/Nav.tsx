@@ -1,38 +1,52 @@
-import Link from 'next/link';
 import { ReactElement, FunctionComponent } from 'react';
+import Link from 'next/link';
 
 import style from './nav.module.scss';
+
 import { routes } from '../Routes';
 import { IRouter } from './../Routes/routes';
-
-import { HeaderCtx } from './../Header';
+import { HeaderCtxConsumer } from '../Header';
 
 type TLink = ReactElement | null;
 
-export interface ILinkProps {
-  isAuth?: boolean;
+interface ILink {
+  href: string;
+  alias: string;
+  title: string;
 }
+
+const NavLink: Function = ({ href, alias, title }: ILink): ReactElement => {
+  return (
+    <Link href={href} as={alias}>
+      <a className={style.link}>{title}</a>
+    </Link>
+  );
+};
 
 export const Nav: FunctionComponent = (): ReactElement => {
   return (
     <nav>
-      <HeaderCtx.Consumer>
-        {({}: ILinkProps): Array<TLink> => {
+      <HeaderCtxConsumer>
+        {({ token }) => {
           return routes.map(
             (route: IRouter, index: number): TLink => {
-              let { router, alias, title } = route;
+              let { isHidden, isProtected, ...linkData } = route;
 
-              return (
-                <Link key={index} href={router} as={alias}>
-                  <a className={style.link}>{title}</a>
-                </Link>
-              );
+              if (isProtected) {
+                if (token) {
+                  return <NavLink key={index} {...linkData} />;
+                } else return null;
+              }
+
+              if (!isHidden) {
+                return <NavLink key={index} {...linkData} />;
+              }
 
               return null;
             }
           );
         }}
-      </HeaderCtx.Consumer>
+      </HeaderCtxConsumer>
     </nav>
   );
 };
