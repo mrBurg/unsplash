@@ -7,73 +7,59 @@ import './../../scss/grid.scss';
 import { STORE_IDS } from '../../stores';
 import { URLS } from '../Routes';
 import Header, { HeaderCtxProvider } from '../Header';
-// import { isBrowser } from '../../utils';
 
 interface IPageProps {
-  Component: any;
-  router: any;
+  Component?: any;
+  router?: any;
   auth?: any;
   pageProps?: any;
 }
 
-interface IPageState {}
+interface IPageState {
+  auth?: any;
+}
 
 @inject(STORE_IDS.AUTH)
 @observer
 export class Page extends Component<IPageProps, IPageState> {
   public state: IPageState = {};
 
-  static getDerivedStateFromProps(props: any, state: any): any {
-    console.info('getDerivedStateFromProps');
-    console.info(props, state);
-
+  static getDerivedStateFromProps(
+    props: IPageProps,
+    state: IPageState
+  ): IPageState {
     let { auth } = props;
 
-    console.info(auth.token, ' <<< Token');
-
-    /* if (!auth.token) {
-      setTimeout(() => {
-        if (isBrowser) {
-          Router.push(URLS.SIGNIN);
-        }
-      }, 3000);
-    } */
-
-    return state;
-  }
-
-  public getSnapshotBeforeUpdate(prevProps: any, prevState: any): null {
-    console.info('getSnapshotBeforeUpdate');
-
-    console.info(prevProps, prevState);
-
-    return null;
+    return {
+      auth,
+      ...state
+    };
   }
 
   public componentDidMount(): void {
-    console.info('componentDidMount');
-  }
+    let {
+      auth: { token }
+    } = this.state;
 
-  public componentDidUpdate(): void {
-    console.info('componentDidMount');
-    let { auth } = this.props;
+    let {
+      router: { route }
+    } = this.props;
 
-    console.info(auth.token, ' <<< Token');
-
-    if (!auth.token) {
+    if (!token && route != URLS.SIGNIN) {
       Router.push(URLS.SIGNIN);
     }
   }
 
   public render(): ReactElement {
-    let { Component, pageProps, auth } = this.props;
+    let { Component, pageProps, router } = this.props;
+    let { auth } = this.state;
 
     return (
       <>
         <HeaderCtxProvider value={{ ...auth }}>
           <Header />
         </HeaderCtxProvider>
-        <Component {...pageProps} />
+        <Component {...pageProps} {...auth} router={router} />
       </>
     );
   }

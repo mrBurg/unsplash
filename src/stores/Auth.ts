@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { APP_TOKEN } from './../constants';
-import { getFromLocalStorage, isBrowser } from '../utils';
+import { getFromLocalStorage, isBrowser, setToLocalStorage } from '../utils';
 
 export default class AuthStore {
   @observable
@@ -10,13 +10,21 @@ export default class AuthStore {
     this.readToken();
   }
 
-  private readToken() {
+  private readToken(): void {
     if (isBrowser) {
       const token = getFromLocalStorage(APP_TOKEN);
 
       if (token) {
         this.token = token;
       }
+    }
+  }
+
+  public set saveToken(token: string) {
+    if (isBrowser) {
+      setToLocalStorage(APP_TOKEN, token);
+
+      this.token = token;
     }
   }
 }

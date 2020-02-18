@@ -4,7 +4,7 @@ export interface IHeaderCtx {
   token: string;
 }
 
-const HeaderCtx = createContext<IHeaderCtx>({
+export const HeaderCtx = createContext<IHeaderCtx>({
   token: ''
 });
 

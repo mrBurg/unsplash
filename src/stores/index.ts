@@ -1,5 +1,5 @@
 import AuthStore from './Auth';
-import Counter from './counter';
+import Counter from './Counter';
 
 export enum STORE_IDS {
   AUTH = 'auth',

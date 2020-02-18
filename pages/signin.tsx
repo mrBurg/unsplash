@@ -22,7 +22,7 @@ export default class Signin extends Component {
       console.info('redirect to /');*/
     if (isBrowser) {
       // Router.push(URLS.USER);
-      console.info(API_DOMAIN);
+      // console.info(API_DOMAIN);
       /* console.info(
         `https://unsplash.com/oauth/authorize${jsonToQueryString(queryStr)}`
       ); */
