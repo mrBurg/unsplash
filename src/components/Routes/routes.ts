@@ -10,12 +10,13 @@ export enum URLS {
   HOME = '/',
   SIGNUP = '/signup',
   SIGNIN = '/signin',
-  USER_PAGE = '/user'
+  USER = '/user',
+  OAUTH = '/oauth'
 }
 
 export const routes: Array<IRouter> = [
   {
-    href: URLS.USER_PAGE,
+    href: URLS.USER,
     isProtected: true,
     alias: 'user',
     title: 'User'

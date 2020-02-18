@@ -3,12 +3,12 @@ import Link from 'next/link';
 
 import style from './header.module.scss';
 
+import { HeaderCtxConsumer } from '.';
+import { IHeaderCtx } from './context';
 import Logo from './../../images/logo.svg';
 import { URLS } from '../Routes';
 import Search from '../Search';
 import Nav from '../Nav';
-import { HeaderCtxConsumer } from '.';
-import { IHeaderCtx } from './context';
 
 export const Header: FunctionComponent = (): ReactElement => {
   return (
