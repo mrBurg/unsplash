@@ -1,27 +1,24 @@
 import { Component, ReactElement, FocusEvent } from 'react';
+import { inject, observer } from 'mobx-react';
 
-import style from './search.module.scss';
-import { HeaderCtxConsumer } from '../Header';
+import style from './search.scss';
 
-interface IProps {}
+import { IComponentProps, IComponentState } from '../../interfaces';
+import { STORE_IDS } from '../../stores';
 
-interface IState {
+interface ISearchState extends IComponentState {
   background: string;
 }
 
-export class Search extends Component {
-  state: IState = {
+@inject(STORE_IDS.AUTH)
+@observer
+export class Search extends Component<IComponentProps, ISearchState> {
+  public state: ISearchState = {
     background: style.blur
   };
 
-  static getDerivedStateFromProps({}: IProps, state: IState): IState {
-    return state;
-  }
-
-  private changeInputBackground = (
-    event: FocusEvent<HTMLInputElement>
-  ): void => {
-    let background: string;
+  private changeInputState = (event: FocusEvent<HTMLInputElement>): void => {
+    let background: string = this.state.background;
 
     switch (event.type) {
       case 'focus':
@@ -30,8 +27,6 @@ export class Search extends Component {
       case 'blur':
         background = style.blur;
         break;
-      default:
-        background = style.blur;
     }
 
     this.setState({
@@ -39,30 +34,38 @@ export class Search extends Component {
     });
   };
 
-  render(): ReactElement {
-    return (
-      <HeaderCtxConsumer>
-        {({ token }) => {
-          if (token) {
-            return (
-              <div className={`${style.wrapper} ${this.state.background}`}>
-                <button className={style.button}>
-                  <div className={style.icon}></div>
-                </button>
-                <input
-                  className={style.input}
-                  onFocus={this.changeInputBackground}
-                  onBlur={this.changeInputBackground}
-                  type='text'
-                  placeholder='Search'
-                />
-              </div>
-            );
-          }
+  public componentDidMount(): void {
+    let {
+      auth: { token }
+    } = this.props;
 
-          return null;
-        }}
-      </HeaderCtxConsumer>
-    );
+    if (token) {
+      this.setState({
+        token
+      });
+    }
+  }
+
+  render(): ReactElement | null {
+    let { token } = this.state;
+
+    if (token) {
+      return (
+        <div className={`${style.wrapper} ${this.state.background}`}>
+          <button className={style.button}>
+            <div className={style.icon}></div>
+          </button>
+          <input
+            className={style.input}
+            onFocus={this.changeInputState}
+            onBlur={this.changeInputState}
+            type='text'
+            placeholder='Search'
+          />
+        </div>
+      );
+    }
+
+    return null;
   }
 }

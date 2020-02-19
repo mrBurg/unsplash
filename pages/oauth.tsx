@@ -1,27 +1,32 @@
-import { ReactElement, FunctionComponent } from 'react';
+import { Component } from 'react';
 import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
-import Preloader from './../src/images/svg/preloader.svg';
+import Preloader from './../src/components/Preloader';
 
 import { URLS } from '../src/components/Routes';
 import { STORE_IDS } from '../src/stores';
-import { isBrowser } from '../src/utils';
+import { IComponentProps } from '../src/interfaces';
 
-const OAuth: FunctionComponent = inject(STORE_IDS.AUTH)(
-  observer(
-    (props: any): ReactElement => {
-      let { auth, router } = props;
+@inject(STORE_IDS.AUTH)
+@observer
+export default class OAuth extends Component<IComponentProps> {
+  constructor(props: any) {
+    super(props);
 
-      auth.saveToken = router.query.code;
+    let {
+      auth,
+      router: { query }
+    } = props;
 
-      if (isBrowser) {
-        Router.push(URLS.HOME);
-      }
+    auth.saveToken = query.code;
+  }
 
-      return <Preloader />;
-    }
-  )
-);
+  componentDidMount(): void {
+    Router.push(URLS.HOME);
+  }
 
-export default OAuth;
+  render() {
+    return <Preloader />;
+  }
+}

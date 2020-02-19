@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 // import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
-import Preloader from './../src/images/svg/Preloader.svg';
+import style from './../src/scss/pages/index.module.scss';
 
+import { IComponentState, IComponentProps } from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';
+import Preloader from './../src/components/Preloader';
+// import { isBrowser } from '../src/utils';
 // import { ApiRequest } from '../src/apis';
 // import { URLS } from '../src/components/Routes';
 
-interface IState {}
-
-interface IProps {
+/* interface IProps {
   counter: any;
   token: string;
-}
-
+} */
 // async function getOauth() {
 // let URL: string =
 // 'https://unsplash.com/oauth/authorize?client_id=055022873d112aa5aa5ee75629932fe3b9211adf3c38faec47eda69a5bf919de&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&scope=public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections';
@@ -43,33 +43,38 @@ interface IProps {
 // console.info(response);
 // }
 
-@inject(STORE_IDS.COUNTER)
+@inject(STORE_IDS.AUTH, STORE_IDS.COUNTER)
 @observer
-class Index extends Component<IProps, IState> {
+class Index extends Component<IComponentProps & { counter: any }> {
+  public state: IComponentState = {};
+
   public componentDidMount(): void {
-    // let { isAuth }: any = this.props;
-    /* if (!isAuth) {
-      Router.push(URLS.SIGNIN);
-    } */
+    let {
+      auth: { token }
+    } = this.props;
+
+    if (token) {
+      this.setState({
+        token
+      });
+    }
   }
 
   render() {
     console.info('Page Index');
 
-    console.info(this.props);
-
-    let { token } = this.props;
     let { value, increase, decrease } = this.props.counter;
+    let { token } = this.state;
 
     if (token) {
       return (
-        <div>
+        <div className={style.content}>
           <p className='result'>{value}</p>
           <div className='buttons'>
             <button className='button blue' onClick={decrease}>
               &lt;&lt;&lt;
             </button>
-            <a href='https://unsplash.com/oauth/authorize?client_id=055022873d112aa5aa5ee75629932fe3b9211adf3c38faec47eda69a5bf919de&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&scope=public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections'>
+            <a href='https://unsplash.com/oauth/authorize?client_id=055022873d112aa5aa5ee75629932fe3b9211adf3c38faec47eda69a5bf919de&redirect_uri=http://localhost:3000/oauth&response_type=code&scope=public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections'>
               Login
             </a>
             <button className='button green' onClick={increase}>

@@ -1,7 +1,7 @@
 import { ReactElement, FunctionComponent } from 'react';
 import Link from 'next/link';
 
-import style from './nav.module.scss';
+import style from './nav.scss';
 
 import { routes } from '../Routes';
 import { IRouter } from './../Routes/routes';

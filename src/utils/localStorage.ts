@@ -1,18 +1,30 @@
+import { isBrowser } from './environment';
+
 export async function setToLocalStorage(
   key: string,
   values: string
 ): Promise<void> {
-  window.localStorage.setItem(key, values);
+  if (isBrowser) {
+    window.localStorage.setItem(key, values);
+  }
 }
 
 export function getFromLocalStorage(key?: string): string | null {
-  return window.localStorage.getItem(key || '') || null;
+  if (isBrowser) {
+    return window.localStorage.getItem(key || '');
+  }
+
+  return null;
 }
 
 export function removeItemFromLocalStorage(key: string): void {
-  window.localStorage.removeItem(key);
+  if (isBrowser) {
+    window.localStorage.removeItem(key);
+  }
 }
 
 export function clearLocalStorage(): void {
-  window.localStorage.clear();
+  if (isBrowser) {
+    window.localStorage.clear();
+  }
 }
