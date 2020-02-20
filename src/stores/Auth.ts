@@ -2,9 +2,11 @@ import { observable } from 'mobx';
 import { APP_TOKEN } from './../constants';
 import { getFromLocalStorage, setToLocalStorage } from '../utils';
 
+type TToken = string | null;
+
 export default class AuthStore {
   @observable
-  public token: string = '';
+  public token: TToken = null;
 
   constructor() {
     this.readToken();
@@ -13,10 +15,10 @@ export default class AuthStore {
   public readToken(): void {
     const token = getFromLocalStorage(APP_TOKEN);
 
-    this.token = token ? token : '';
+    this.token = token;
   }
 
-  public set saveToken(token: string) {
+  public saveToken(token: string): void {
     setToLocalStorage(APP_TOKEN, token);
 
     this.token = token;

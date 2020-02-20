@@ -1,4 +1,5 @@
 import { Component, ReactElement } from 'react';
+import { NextComponentType } from 'next';
 import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
@@ -10,7 +11,7 @@ import { URLS } from '../Routes';
 import Header from '../Header';
 
 interface IPageProps extends IComponentProps {
-  Component: any;
+  Component: NextComponentType;
   router: any;
   pageProps?: any;
 }
@@ -25,8 +26,6 @@ export class Page extends Component<IPageProps> {
       auth: { token },
       router: { route }
     } = this.props;
-
-    console.info(token);
 
     if (!token && !(route == URLS.SIGNIN || route == URLS.SIGNUP)) {
       let intervalCount: number = 3;

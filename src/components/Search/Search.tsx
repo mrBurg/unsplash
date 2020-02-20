@@ -5,10 +5,13 @@ import style from './search.scss';
 
 import { IComponentProps, IComponentState } from '../../interfaces';
 import { STORE_IDS } from '../../stores';
+import { isBrowser } from '../../utils';
 
 interface ISearchState extends IComponentState {
   background: string;
 }
+
+type TStateFromProps = ISearchState | null;
 
 @inject(STORE_IDS.AUTH)
 @observer
@@ -33,6 +36,22 @@ export class Search extends Component<IComponentProps, ISearchState> {
       background
     });
   };
+
+  public static getDerivedStateFromProps(
+    props: IComponentProps,
+    state: ISearchState
+  ): TStateFromProps {
+    if (isBrowser) {
+      let { auth } = props;
+
+      return {
+        ...state,
+        ...auth
+      };
+    }
+
+    return null;
+  }
 
   public componentDidMount(): void {
     let {

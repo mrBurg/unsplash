@@ -19,7 +19,7 @@ export default class OAuth extends Component<IComponentProps> {
       router: { query }
     } = props;
 
-    auth.saveToken = query.code;
+    auth.saveToken(query.code);
   }
 
   componentDidMount(): void {

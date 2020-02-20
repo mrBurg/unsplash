@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
 // import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
@@ -60,7 +60,7 @@ class Index extends Component<IComponentProps & { counter: any }> {
     }
   }
 
-  render() {
+  render(): ReactElement {
     console.info('Page Index');
 
     let { value, increase, decrease } = this.props.counter;
