@@ -2,7 +2,7 @@ import { Component, ReactElement } from 'react';
 // import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
-import style from './../src/scss/pages/index.module.scss';
+import style from './../src/scss/pages/index.scss';
 
 import { IComponentState, IComponentProps } from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';

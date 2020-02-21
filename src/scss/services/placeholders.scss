@@ -1,0 +1,5 @@
+@import './constants.scss';
+
+%box-shadow {
+  box-shadow: 3px 3px 1px transparentize($brown, 0.8);
+}

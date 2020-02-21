@@ -1,4 +1,4 @@
-@import './constants.scss';
+@import './services/constants.scss';
 
 * {
   margin: 0;
@@ -12,4 +12,21 @@ body {
   width: 100vw;
   display: flex;
   flex-flow: column nowrap;
+}
+
+a {
+  border: 1px solid $brown;
+  border-radius: 0.3em;
+  border-width: 0 0 1px 0;
+  color: $green;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0.1em;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $brown;
+    border-color: transparent;
+  }
 }

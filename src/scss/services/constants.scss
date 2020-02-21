@@ -1,0 +1,25 @@
+$golden-ratio: 1.61803398875;
+$min-width: 320px;
+$xxs: 320;
+$xs: 480;
+$sm: 640;
+$md: 768;
+$lg: 960;
+$xl: 1200;
+$xxl: 1600;
+
+$transiton: all 0.2s;
+$prefixes: -webkit-, -moz-, -ms-, -o-;
+
+$clear: transparent;
+$white: #fff;
+$brown: #2d221e;
+
+$green: #1f4700;
+$light-green: #005b00;
+$dark-green: #142800;
+$misty-green: fade-out($green, 0.4);
+
+$gray: #dfdfdf;
+$light-gray: #e8e8e8;
+$dark-gray: #7c7c7c;

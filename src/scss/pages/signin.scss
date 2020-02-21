@@ -1,0 +1,32 @@
+@import './../services/placeholders.scss';
+@import './../services/mixins.scss';
+
+.container {
+  align-items: center;
+  background: transparent url('/images/background.png') center / cover no-repeat;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.form {
+  @extend %box-shadow;
+  @include border;
+  @include padding-box(2em);
+
+  background-color: transparentize($white, 0.1);
+  border-radius: 0.5em;
+}
+
+.signin {
+  text-align: justify;
+}
+
+.signup {
+  text-align: center;
+}
+
+.button {
+  margin: 1em 0 0.5em;
+  text-align: center;
+}

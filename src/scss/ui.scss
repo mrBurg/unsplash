@@ -1,0 +1,9 @@
+@import './services/functions.scss';
+@import './services/constants.scss';
+
+.linkButton {
+  background-color: $misty-green;
+  border: none;
+  color: $white;
+  padding: 0.7em golden-ratio(0.7em);
+}

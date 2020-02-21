@@ -1,8 +1,9 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
 // import Router from 'next/router';
 import Link from 'next/link';
 
-import style from './../src/scss/pages/signin.module.scss';
+import ui from './../src/scss/ui.scss';
+import style from './../src/scss/pages/signin.scss';
 
 import { getURL } from '../src/utils';
 // import { URLS } from '../src/components/Routes';
@@ -18,23 +19,31 @@ let queryData = {
 };
 
 export default class Signin extends Component {
-  render() {
+  render(): ReactElement {
     return (
-      <div className={style.signin}>
-        <p>
-          login to{' '}
-          <a href='https://unsplash.com' target='_blank'>
-            https://unsplash.com
-          </a>
-        </p>
-        <div>
-          <a href={getURL('/oauth/authorize', queryData)}>Signin</a>
-        </div>
-        or signup
-        <div>
-          <Link href={URLS.SIGNUP}>
-            <a className='cn'>https://unsplash.com</a>
-          </Link>
+      <div className={style.container}>
+        <div className={style.form}>
+          <div className={style.signin}>
+            <span>Login or confirm your authorization on the site</span>{' '}
+            <a href='https://unsplash.com' target='_blank'>
+              https://unsplash.com
+            </a>
+            <div className={style.button}>
+              <a
+                className={ui.linkButton}
+                href={getURL('/oauth/authorize', queryData)}
+              >
+                Sign In
+              </a>
+            </div>
+          </div>
+
+          <div className={style.signup}>
+            <span>or</span>{' '}
+            <Link href={URLS.SIGNUP}>
+              <a>Sign Up</a>
+            </Link>
+          </div>
         </div>
       </div>
     );

@@ -1,13 +1,6 @@
-@import './../../scss/constants.scss';
+@import './../../scss/services/constants.scss';
 
 .link {
-  color: $green;
   font-size: 1.2em;
-  padding: 0.5em;
-  text-decoration: none;
-  transition: all 0.2s;
-
-  &:hover {
-    color: $brown;
-  }
+  padding: 0.3em;
 }
