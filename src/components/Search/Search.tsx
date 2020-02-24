@@ -14,8 +14,8 @@ interface ISearchState extends IComponentState {
 
 @inject(STORE_IDS.AUTH)
 @observer
-export class Search extends Component<IComponentProps & any, ISearchState> {
-  public state: ISearchState & any = {
+export class Search extends Component<IComponentProps, ISearchState> {
+  public state: ISearchState = {
     background: style.blur
   };
 
