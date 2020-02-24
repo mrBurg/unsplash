@@ -32,6 +32,23 @@ const NavLink: FunctionComponent<ILink> = ({
   </Link>
 );
 
+const Routes: Function = ({ token }: IComponentState): Array<TLink> =>
+  routes.map(
+    (route: IRouter, index: number): TLink => {
+      let { isHidden, isProtected, ...linkData } = route;
+
+      if (isHidden) return null;
+
+      if (isProtected) {
+        if (token) {
+          return <NavLink key={index} {...linkData} />;
+        } else return null;
+      }
+
+      return <NavLink key={index} {...linkData} />;
+    }
+  );
+
 @inject(STORE_IDS.AUTH)
 @observer
 export class Nav extends Component<IComponentProps, INavState> {
@@ -43,33 +60,15 @@ export class Nav extends Component<IComponentProps, INavState> {
     });
   }
 
-  render(): TLink | null {
-    let {
-      auth: { token }
-    } = this.props;
+  render(): TLink {
+    let { auth } = this.props;
 
     let { isBrowser } = this.state;
 
     if (isBrowser) {
       return (
         <div className={style.nav}>
-          {routes.map(
-            (route: IRouter, index: number): TLink => {
-              let { isHidden, isProtected, ...linkData } = route;
-
-              if (isHidden) {
-                return null;
-              }
-
-              if (isProtected) {
-                if (token) {
-                  return <NavLink key={index} {...linkData} />;
-                } else return null;
-              }
-
-              return <NavLink key={index} {...linkData} />;
-            }
-          )}
+          <Routes {...auth} />
         </div>
       );
     }

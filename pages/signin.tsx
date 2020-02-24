@@ -1,15 +1,13 @@
 import { Component, ReactElement } from 'react';
-// import Router from 'next/router';
 import Link from 'next/link';
 
 import ui from './../src/scss/ui.scss';
 import style from './../src/scss/pages/signin.scss';
 
 import { getURL } from '../src/utils';
-// import { URLS } from '../src/components/Routes';
+import { URLS } from '../src/components/Routes';
 
 import { API_REDIRECT, API_SCOPE, ACCESS_KEY } from './../src/constants';
-import { URLS } from '../src/components/Routes';
 
 let queryData = {
   client_id: ACCESS_KEY,
