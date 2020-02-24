@@ -1,12 +1,13 @@
 $golden-ratio: 1.61803398875;
 $min-width: 320px;
-$xxs: 320;
-$xs: 480;
-$sm: 640;
-$md: 768;
-$lg: 960;
-$xl: 1200;
-$xxl: 1600;
+$xxs: 20em;
+$xs: 30em;
+$sm: 40em;
+$md: 48em;
+$lg: 60em;
+$xl: 75em;
+$xxl: 100em;
+$form-min-width: 32.25em;
 
 $transiton: all 0.2s;
 $prefixes: -webkit-, -moz-, -ms-, -o-;

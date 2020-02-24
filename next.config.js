@@ -5,6 +5,10 @@ dotenv.config({ path: './.env' });
 
 module.exports = withSass({
   cssModules: true,
+  cssLoaderOptions: {
+    importLoaders: 2,
+    localIdentName: '[local]___[hash:base64:5]'
+  },
   env: {
     HOST: process.env.HOST,
     PORT: process.env.PORT,
