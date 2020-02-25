@@ -8,10 +8,10 @@ export interface IRouter {
 
 export enum URLS {
   HOME = '/',
-  SIGNUP = '/signup',
   SIGNIN = '/signin',
-  LOGOUT = '/logout',
   USER = '/user',
+  LOGOUT = '/logout',
+  SIGNUP = '/signup',
   OAUTH = '/oauth'
 }
 

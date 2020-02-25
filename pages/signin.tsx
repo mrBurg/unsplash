@@ -4,7 +4,7 @@ import Link from 'next/link';
 import ui from './../src/scss/ui.scss';
 import style from './../src/scss/pages/signin.scss';
 
-import { getURL } from '../src/utils';
+import { makeUrl } from '../src/utils';
 import { URLS } from '../src/components/Routes';
 
 import { API_REDIRECT, API_SCOPE, ACCESS_KEY } from './../src/constants';
@@ -29,7 +29,7 @@ export default class Signin extends Component {
             <div className={style.button}>
               <a
                 className={ui.linkButton}
-                href={getURL('/oauth/authorize', queryData)}
+                href={makeUrl('/oauth/authorize', queryData)}
               >
                 Sign In
               </a>

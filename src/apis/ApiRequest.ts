@@ -1,17 +1,14 @@
 import axios from 'axios';
 
-const UNSPLASH_API = process.env.UNSPLASH_API;
-const ACCESS_KEY = process.env.ACCESS_KEY;
+export interface IQueryData {
+  [key: string]: string;
+}
 
-interface RequestOptions {
-  headers?: any;
-  client_id?: string;
-  client_secret?: string; //bearer
-  redirect_uri?: string;
-  code?: any;
-  grant_type?: any;
-  //'public read_photos write_photos';
-  // created_at: 1436544465;
+// const UNSPLASH_API = process.env.UNSPLASH_API;
+// const ACCESS_KEY = process.env.ACCESS_KEY;
+
+interface IRequestOptions {
+  [key: string]: string;
 }
 
 /*
@@ -21,7 +18,7 @@ Accept: 'application/json',
 */
 
 export class ApiRequest {
-  public static async get<T>(
+  /* public static async get<T>(
     url: string,
     options?: RequestOptions
   ): Promise<any> {
@@ -34,9 +31,9 @@ export class ApiRequest {
         ...options
       };
 
-      console.info(url);
+      console.info(url); */
 
-      /*
+  /*
       fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, cors, *same-origin
@@ -53,18 +50,21 @@ export class ApiRequest {
     .then(response => response.json());
       */
 
-      const response = await axios.get<T>(url, requestOptions);
+  /* const response = await axios.get<T>(url, requestOptions);
 
       console.info(response.data);
       return response.data;
     } catch (e) {
       throw e;
     }
-  }
+  } */
 
-  public static async post<T>(uri: string, options?: RequestOptions) {
+  public static async post(
+    url: string,
+    options?: IRequestOptions
+  ): Promise<any> {
     try {
-      const requestOptions: RequestOptions = {
+      const requestOptions: IRequestOptions = {
         /*headers: {
           Authorization: `Client-ID ${ACCESS_KEY}`
           // Authorization: `Bearer ${ACCESS_KEY}`
@@ -72,15 +72,19 @@ export class ApiRequest {
         ...options
       };
 
-      console.info(UNSPLASH_API, options);
+      console.info(requestOptions, 'requestOptions');
 
-      const response = await axios.post<T>(uri, requestOptions);
+      const response = await axios({
+        method: 'post',
+        url,
+        data: requestOptions
+      });
 
       console.info(response.data);
 
       return response.data;
-    } catch (e) {
-      throw e;
+    } catch (error) {
+      throw error;
     }
   }
   /* public static get = async <T>(uri: string, _options: RequestOptions = {}) => {

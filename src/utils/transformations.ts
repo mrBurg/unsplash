@@ -1,4 +1,4 @@
-import { IQueryData } from '.';
+import { IQueryData } from '../apis/ApiRequest';
 
 export const jsonToQueryString = (json: IQueryData, encode?: boolean): string =>
   '?' +
