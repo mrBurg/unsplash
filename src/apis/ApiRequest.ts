@@ -72,15 +72,11 @@ export class ApiRequest {
         ...options
       };
 
-      console.info(requestOptions, 'requestOptions');
-
       const response = await axios({
         method: 'post',
         url,
         data: requestOptions
       });
-
-      console.info(response.data);
 
       return response.data;
     } catch (error) {

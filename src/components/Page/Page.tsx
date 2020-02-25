@@ -1,6 +1,6 @@
 import { Component, ReactElement } from 'react';
 import { NextComponentType } from 'next';
-// import Router from 'next/router';
+import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
 import './../../scss/grid.scss';
@@ -38,7 +38,7 @@ export class Page extends Component<IPageProps> {
         if (!intervalCount) {
           clearInterval(interval);
 
-          // Router.push(URLS.SIGNIN);
+          Router.push(URLS.SIGNIN);
         }
       }, 1000);
     }
