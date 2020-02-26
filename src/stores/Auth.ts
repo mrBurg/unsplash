@@ -1,6 +1,11 @@
 import { observable } from 'mobx';
+
 import { APP_TOKEN } from './../constants';
-import { getFromLocalStorage, setToLocalStorage } from '../utils';
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+  removeItemFromLocalStorage
+} from '../utils';
 
 type TToken = string | null;
 
@@ -22,5 +27,17 @@ export default class AuthStore {
     setToLocalStorage(APP_TOKEN, token);
 
     this.token = token;
+  }
+
+  public removeToken(): void {
+    this.token = null;
+
+    removeItemFromLocalStorage(APP_TOKEN);
+  }
+
+  public get hasToken(): TToken {
+    this.readToken();
+
+    return this.token;
   }
 }

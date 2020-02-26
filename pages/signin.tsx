@@ -17,7 +17,7 @@ let queryData = {
 };
 
 export default class Signin extends Component {
-  render(): ReactElement {
+  public render(): ReactElement {
     return (
       <div className={style.container}>
         <div className={style.form}>

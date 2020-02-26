@@ -20,7 +20,7 @@ export default class App extends NextApp {
     };
   }
 
-  render(): ReactElement {
+  public render(): ReactElement {
     return (
       <Provider {...stores}>
         <Page {...this.props} />

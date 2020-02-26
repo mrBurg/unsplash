@@ -7,7 +7,7 @@ export interface IQueryData {
 // const UNSPLASH_API = process.env.UNSPLASH_API;
 // const ACCESS_KEY = process.env.ACCESS_KEY;
 
-interface IRequestOptions {
+export interface IRequestOptions {
   [key: string]: string;
 }
 

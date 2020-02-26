@@ -6,7 +6,7 @@ import style from './../src/scss/pages/signup.scss';
 import { URLS } from '../src/components/Routes';
 
 export default class Signup extends Component {
-  render(): ReactElement {
+  public render(): ReactElement {
     return (
       <div className={style.container}>
         <form className={style.form} action=''>
