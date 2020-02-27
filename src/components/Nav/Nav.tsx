@@ -5,14 +5,9 @@ import { inject, observer } from 'mobx-react';
 import style from './nav.scss';
 
 import { IComponentProps, IComponentState } from '../../interfaces';
-import { isBrowser } from '../../utils';
 import { STORE_IDS } from '../../stores';
 import { routes } from '../Routes';
 import { IRouter } from './../Routes/routes';
-
-interface INavState extends IComponentState {
-  isBrowser?: any;
-}
 
 type TLink = ReactElement | null;
 
@@ -51,28 +46,14 @@ const Routes: Function = ({ token }: IComponentState): Array<TLink> =>
 
 @inject(STORE_IDS.AUTH)
 @observer
-export class Nav extends Component<IComponentProps, INavState> {
-  public state: INavState = {};
-
-  public componentDidMount(): void {
-    this.setState({
-      isBrowser
-    });
-  }
-
-  render(): TLink {
+export class Nav extends Component<IComponentProps> {
+  public render(): ReactElement {
     let { auth } = this.props;
 
-    let { isBrowser } = this.state;
-
-    if (isBrowser) {
-      return (
-        <div className={style.nav}>
-          <Routes {...auth} />
-        </div>
-      );
-    }
-
-    return null;
+    return (
+      <div className={style.nav}>
+        <Routes {...auth} />
+      </div>
+    );
   }
 }

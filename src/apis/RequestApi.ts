@@ -17,7 +17,7 @@ Accept: 'application/json',
       // ...(authRequired && token ? { Authorization: `Bearer ${token}` } : {}),
 */
 
-export class ApiRequest {
+export class RequestApi {
   /* public static async get<T>(
     url: string,
     options?: RequestOptions

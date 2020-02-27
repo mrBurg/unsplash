@@ -6,15 +6,32 @@ import {
   setToLocalStorage,
   removeItemFromLocalStorage
 } from '../utils';
+import { AuthApi } from '../apis';
+import Router from 'next/router';
+import { URLS } from '../components/Routes';
 
-type TToken = string | null;
+export type TToken = string | null;
 
 export default class AuthStore {
   @observable
   public token: TToken = null;
 
-  constructor() {
-    this.readToken();
+  constructor(private _authApi: AuthApi) {}
+
+  public async fetchToken(): Promise<boolean | void> {
+    const tokenData = await this._authApi.fetchToken();
+
+    if (tokenData) {
+      let { access_token } = tokenData;
+
+      if (access_token) {
+        this.saveToken(access_token);
+
+        return Router.push(URLS.HOME);
+      }
+    }
+
+    Router.push(URLS.SIGNIN);
   }
 
   public readToken(): void {

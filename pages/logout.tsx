@@ -2,8 +2,8 @@ import React, { Component, ReactElement } from 'react';
 import Router from 'next/router';
 import { observer, inject } from 'mobx-react';
 
-import { URLS } from '../src/components/Routes';
 import { IComponentProps } from '../src/interfaces';
+import { URLS } from '../src/components/Routes';
 import { STORE_IDS } from '../src/stores';
 import Preloader from '../src/components/Preloader';
 

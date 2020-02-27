@@ -5,12 +5,12 @@ import { inject, observer } from 'mobx-react';
 import style from './../src/scss/pages/index.scss';
 
 import { IComponentState, IComponentProps } from '../src/interfaces';
-import { STORE_IDS } from '../src/stores';
 import { URLS } from '../src/components/Routes';
+import { STORE_IDS } from '../src/stores';
 import Preloader from './../src/components/Preloader';
 
 interface IIndexProps extends IComponentProps {
-  counter: any;
+  counter?: any;
 }
 
 @inject(STORE_IDS.AUTH, STORE_IDS.COUNTER)
@@ -18,11 +18,22 @@ interface IIndexProps extends IComponentProps {
 class Index extends Component<IIndexProps, IComponentState> {
   public state: IComponentState = {};
 
+  static getDerivedStateFromProps(props: IIndexProps, state: IComponentState) {
+    props.auth.readToken();
+
+    return {
+      ...state
+    };
+  }
+
   public componentDidMount(): void {
     let { auth } = this.props;
 
-    if (auth.hasToken) {
-      this.setState((state: IComponentState) => ({ ...state, ...auth }));
+    if (auth.token) {
+      this.setState((state: IComponentState) => ({
+        ...state,
+        token: { ...auth }
+      }));
     } else {
       Router.push(URLS.SIGNIN);
     }
@@ -31,7 +42,7 @@ class Index extends Component<IIndexProps, IComponentState> {
   public componentDidUpdate(): void {
     let { auth } = this.props;
 
-    if (!auth.hasToken) {
+    if (!auth.token) {
       Router.push(URLS.SIGNIN);
     }
   }
