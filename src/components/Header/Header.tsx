@@ -5,6 +5,7 @@ import style from './header.scss';
 
 import { IComponentProps } from '../../interfaces';
 import { STORE_IDS } from '../../stores';
+
 import Logo from './../Logo';
 import Search from './../Search';
 import Nav from './../Nav';
@@ -12,9 +13,9 @@ import Nav from './../Nav';
 @inject(STORE_IDS.AUTH)
 @observer
 export class Header extends Component<IComponentProps> {
-  render(): ReactElement {
+  public render(): ReactElement {
     let {
-      auth: { token }
+      authStore: { token }
     } = this.props;
 
     return (

@@ -11,17 +11,17 @@ import { IRouter } from './../Routes/routes';
 
 type TLink = ReactElement | null;
 
-interface ILink {
+interface ILinkProps {
   href: string;
   alias: string;
   title: string;
 }
 
-const NavLink: FunctionComponent<ILink> = ({
+const NavLink: FunctionComponent<ILinkProps> = ({
   href,
   alias,
   title
-}: ILink): ReactElement => (
+}: ILinkProps): ReactElement => (
   <Link href={href} as={alias}>
     <a className={style.link}>{title}</a>
   </Link>
@@ -48,11 +48,11 @@ const Routes: Function = ({ token }: IComponentState): Array<TLink> =>
 @observer
 export class Nav extends Component<IComponentProps> {
   public render(): ReactElement {
-    let { auth } = this.props;
+    let { authStore } = this.props;
 
     return (
       <div className={style.nav}>
-        <Routes {...auth} />
+        <Routes {...authStore} />
       </div>
     );
   }

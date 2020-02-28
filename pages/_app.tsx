@@ -20,7 +20,9 @@ interface IAppProps extends AppInitialProps {
 export default class App extends NextApp {
   private mobxStore: IStores;
 
-  static async getInitialProps(appContext: AppContext): Promise<IAppProps> {
+  public static async getInitialProps(
+    appContext: AppContext
+  ): Promise<IAppProps> {
     const mobxStore = initializeStores();
     appContext.ctx.mobxStore = mobxStore;
     const appProps = await NextApp.getInitialProps(appContext);

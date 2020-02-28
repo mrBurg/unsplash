@@ -1,55 +1,24 @@
 import { Component, ReactElement } from 'react';
-import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
 import style from './../src/scss/pages/index.scss';
 
-import { IComponentState, IComponentProps } from '../src/interfaces';
-import { URLS } from '../src/components/Routes';
+import { IComponentProps } from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';
 import Preloader from './../src/components/Preloader';
 
 interface IIndexProps extends IComponentProps {
-  counter?: any;
+  counterStore?: any;
 }
 
 @inject(STORE_IDS.AUTH, STORE_IDS.COUNTER)
 @observer
-class Index extends Component<IIndexProps, IComponentState> {
-  public state: IComponentState = {};
-
-  static getDerivedStateFromProps(props: IIndexProps, state: IComponentState) {
-    props.auth.readToken();
-
-    return {
-      ...state
-    };
-  }
-
-  public componentDidMount(): void {
-    let { auth } = this.props;
-
-    if (auth.token) {
-      this.setState((state: IComponentState) => ({
-        ...state,
-        token: { ...auth }
-      }));
-    } else {
-      Router.push(URLS.SIGNIN);
-    }
-  }
-
-  public componentDidUpdate(): void {
-    let { auth } = this.props;
-
-    if (!auth.token) {
-      Router.push(URLS.SIGNIN);
-    }
-  }
-
+class Index extends Component<IIndexProps> {
   public render(): ReactElement {
-    let { value, increase, decrease } = this.props.counter;
-    let { token } = this.state;
+    let { authStore, counterStore } = this.props;
+
+    let { value, increase, decrease } = counterStore;
+    let { token } = authStore;
 
     if (token) {
       return (

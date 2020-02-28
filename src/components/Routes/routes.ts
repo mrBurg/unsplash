@@ -28,11 +28,11 @@ export const routes: Array<IRouter> = [
     title: 'User',
     isProtected: true
   },
-  /* {
+  {
     href: URLS.SIGNUP,
     alias: 'signup',
     title: 'Signup'
-  }, */
+  },
   {
     href: URLS.LOGOUT,
     alias: 'logout',

@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { observable } from 'mobx';
 
 import { APP_TOKEN } from './../constants';
@@ -6,9 +7,8 @@ import {
   setToLocalStorage,
   removeItemFromLocalStorage
 } from '../utils';
-import { AuthApi } from '../apis';
-import Router from 'next/router';
 import { URLS } from '../components/Routes';
+import { AuthApi } from '../apis';
 
 export type TToken = string | null;
 
@@ -18,7 +18,7 @@ export default class AuthStore {
 
   constructor(private _authApi: AuthApi) {}
 
-  public async fetchToken(): Promise<boolean | void> {
+  public async fetchToken(): Promise<boolean> {
     const tokenData = await this._authApi.fetchToken();
 
     if (tokenData) {
@@ -31,7 +31,7 @@ export default class AuthStore {
       }
     }
 
-    Router.push(URLS.SIGNIN);
+    return Router.push(URLS.SIGNIN);
   }
 
   public readToken(): void {
@@ -47,9 +47,9 @@ export default class AuthStore {
   }
 
   public removeToken(): void {
-    this.token = null;
-
     removeItemFromLocalStorage(APP_TOKEN);
+
+    this.token = null;
   }
 
   public get hasToken(): TToken {

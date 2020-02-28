@@ -7,9 +7,9 @@ import UserStore from './User';
 import Counter from './Counter';
 
 export enum STORE_IDS {
-  AUTH = 'auth',
-  USER = 'user',
-  COUNTER = 'counter'
+  AUTH = 'authStore',
+  USER = 'userStore',
+  COUNTER = 'counterStore'
 }
 
 export interface IStores {
@@ -21,9 +21,9 @@ export interface IStores {
 const authApi = new AuthApi();
 const userApi = new UserApi();
 
-const auth = new AuthStore(authApi);
-const user = new UserStore(auth, userApi);
-const counter = new Counter();
+const authStore = new AuthStore(authApi);
+const userStore = new UserStore(userApi);
+const counterStore = new Counter();
 
 let stores: IStores | null = null;
 
@@ -35,17 +35,17 @@ export default function initializeStores(initialData?: IStores) {
 
   if (isServer) {
     return {
-      [STORE_IDS.AUTH]: auth,
-      [STORE_IDS.USER]: user,
-      [STORE_IDS.COUNTER]: counter
+      [STORE_IDS.AUTH]: authStore,
+      [STORE_IDS.USER]: userStore,
+      [STORE_IDS.COUNTER]: counterStore
     };
   }
 
   if (stores === null) {
     stores = {
-      [STORE_IDS.AUTH]: auth,
-      [STORE_IDS.USER]: user,
-      [STORE_IDS.COUNTER]: counter
+      [STORE_IDS.AUTH]: authStore,
+      [STORE_IDS.USER]: userStore,
+      [STORE_IDS.COUNTER]: counterStore
     };
   }
 

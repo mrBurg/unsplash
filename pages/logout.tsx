@@ -11,9 +11,9 @@ import Preloader from '../src/components/Preloader';
 @observer
 export default class Logout extends Component<IComponentProps> {
   public componentDidMount(): void {
-    let { auth } = this.props;
+    let { authStore } = this.props;
 
-    auth.removeToken();
+    authStore.removeToken();
 
     Router.push(URLS.SIGNIN);
   }

@@ -1,7 +1,9 @@
 export interface IComponentProps {
-  auth?: any;
+  authStore?: any;
+  router?: any;
 }
 
 export interface IComponentState {
-  token?: string;
+  isCSR?: boolean;
+  token?: any;
 }
