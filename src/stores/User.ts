@@ -6,11 +6,14 @@ export default class UserStore {
   @observable
   public user: any = null;
 
-  constructor(private _userApi: UserApi) {}
+  constructor(private _userApi: UserApi, private _authStore: any) {}
 
   public async fetchUser(): Promise<boolean | void> {
-    const userData = await this._userApi.fetchUser();
+    let { token, hasToken } = this._authStore;
 
-    console.info(userData);
+    if (hasToken) {
+      const userData = await this._userApi.fetchUser(token);
+      console.info(userData);
+    }
   }
 }

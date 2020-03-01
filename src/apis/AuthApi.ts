@@ -9,7 +9,7 @@ import {
 import { URLS } from '../components/Routes';
 import { makeUrl } from '../utils';
 
-interface IrequestParams {
+interface IrequestData {
   client_id: string;
   client_secret: string;
   redirect_uri: string;
@@ -28,28 +28,36 @@ export interface IresponseParams {
 export class AuthApi {
   public async fetchToken(): Promise<IresponseParams | null> {
     let { query } = Router;
+    console.log(
+      `%c query.code:%c ${query.code} `,
+      'background: #0f0; color: #000',
+      'background: #fff; color: #000'
+    );
 
-    let url: string = makeUrl(`${URLS.OAUTH}/token`);
+    if (query.code) {
+      let url: string = makeUrl(`${URLS.OAUTH}/token`);
 
-    let requestParams: IrequestParams = {
-      client_id,
-      client_secret,
-      redirect_uri,
-      code: query.code,
-      grant_type: 'authorization_code'
-    };
+      let requestData: IrequestData = {
+        client_id,
+        client_secret,
+        redirect_uri,
+        code: query.code,
+        grant_type: 'authorization_code'
+      };
 
-    try {
-      const response = await axios({
-        method: 'post',
-        url,
-        data: requestParams
-      });
+      try {
+        const response = await axios({
+          method: 'post',
+          url,
+          data: requestData
+        });
 
-      return response.data;
-    } catch (error) {
-      console.info(error);
-      return null;
+        return response.data;
+      } catch (error) {
+        console.info(error);
+      }
     }
+
+    return null;
   }
 }

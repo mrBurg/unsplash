@@ -27,7 +27,7 @@ const NavLink: FunctionComponent<ILinkProps> = ({
   </Link>
 );
 
-const Routes: Function = ({ token }: IComponentState): Array<TLink> =>
+const Routes: Function = ({ hasToken }: IComponentState): Array<TLink> =>
   routes.map(
     (route: IRouter, index: number): TLink => {
       let { isHidden, isProtected, ...linkData } = route;
@@ -35,7 +35,7 @@ const Routes: Function = ({ token }: IComponentState): Array<TLink> =>
       if (isHidden) return null;
 
       if (isProtected) {
-        if (token) {
+        if (hasToken) {
           return <NavLink key={index} {...linkData} />;
         } else return null;
       }

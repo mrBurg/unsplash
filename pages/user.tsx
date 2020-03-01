@@ -6,7 +6,7 @@ import { STORE_IDS } from '../src/stores';
 import Preloader from './../src/components/Preloader';
 
 interface IUserProps extends IComponentProps {
-  user: any;
+  userStore: any;
 }
 
 @inject(STORE_IDS.USER)
@@ -25,22 +25,20 @@ class User extends Component<IUserProps, IComponentState> {
   } */
 
   public componentDidMount(): void {
-    // let { user } = this.props;
-    // user.fetchUser();
+    let { userStore } = this.props;
+
+    userStore.fetchUser();
   }
 
   public render(): ReactElement {
     console.info(this.state, 'User State');
 
-    let { user } = this.props;
+    let { userStore } = this.props;
 
-    console.info(user, 'Page User');
-
-    if (user) {
+    if (userStore) {
       return (
         <>
           <h1>Page User</h1>
-          <button onClick={this.props.user.fetchUser}>GetUser</button>
         </>
       );
     }

@@ -5,5 +5,5 @@ export interface IComponentProps {
 
 export interface IComponentState {
   isCSR?: boolean;
-  token?: any;
+  hasToken?: any;
 }
