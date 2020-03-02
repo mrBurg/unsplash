@@ -1,30 +1,38 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
-import { makeUrl } from '../utils';
+import { makeApiUrl } from '../utils';
 
 export class UserApi {
-  public async fetchUser(): Promise<boolean | null> {
-    let url: string = makeUrl('/me');
+  public async fetchUser(token: string): Promise<boolean | null> {
+    if (token) {
+      let url: string = makeApiUrl('/me');
 
-    let requestParams: any = {
-      headers: {
-        Authorization: `Bearer`
-      }
-    };
-
-    console.info(url, requestParams);
-
-    try {
-      const response = await axios({
+      let requestConfig: AxiosRequestConfig = {
         method: 'get',
         url,
-        data: requestParams
-      });
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      };
 
-      return response.data;
-    } catch (error) {
-      console.info(error);
-      return null;
+      const failFetch: Function = async () => {
+        return { data: { ...requestConfig } };
+      };
+
+      try {
+        // const response = await axios(requestConfig);
+        const response = await failFetch(requestConfig);
+
+        return response.data;
+      } catch (error) {
+        console.info(error);
+
+        return null;
+        axios;
+      }
     }
+
+    return null;
   }
 }

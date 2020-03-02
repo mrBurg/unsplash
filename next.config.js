@@ -12,6 +12,7 @@ module.exports = withSass({
   env: {
     HOST: process.env.HOST,
     PORT: process.env.PORT,
+    APP_DOMAIN: process.env.APP_DOMAIN,
     APP_TOKEN: process.env.APP_TOKEN,
     API_DOMAIN: process.env.API_DOMAIN,
     API_REDIRECT: process.env.API_REDIRECT,

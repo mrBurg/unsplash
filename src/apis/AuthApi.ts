@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 import {
   ACCESS_KEY as client_id,
@@ -9,7 +9,7 @@ import {
 import { URLS } from '../components/Routes';
 import { makeUrl } from '../utils';
 
-interface IrequestParams {
+interface IrequestData {
   client_id: string;
   client_secret: string;
   redirect_uri: string;
@@ -27,29 +27,38 @@ export interface IresponseParams {
 
 export class AuthApi {
   public async fetchToken(): Promise<IresponseParams | null> {
-    let { query } = Router;
+    let {
+      query: { code }
+    } = Router;
 
-    let url: string = makeUrl(`${URLS.OAUTH}/token`);
+    if (code) {
+      let url: string = makeUrl(`${URLS.OAUTH}/token`);
 
-    let requestParams: IrequestParams = {
-      client_id,
-      client_secret,
-      redirect_uri,
-      code: query.code,
-      grant_type: 'authorization_code'
-    };
+      let requestData: IrequestData = {
+        client_id,
+        client_secret,
+        redirect_uri,
+        code,
+        grant_type: 'authorization_code'
+      };
 
-    try {
-      const response = await axios({
+      let requestConfig: AxiosRequestConfig = {
         method: 'post',
         url,
-        data: requestParams
-      });
+        data: requestData
+      };
 
-      return response.data;
-    } catch (error) {
-      console.info(error);
-      return null;
+      try {
+        const response = await axios(requestConfig);
+
+        return response.data;
+      } catch (error) {
+        console.info(error);
+
+        return null;
+      }
     }
+
+    return null;
   }
 }

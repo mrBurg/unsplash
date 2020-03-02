@@ -8,7 +8,7 @@ import { makeUrl } from '../src/utils';
 import { URLS } from '../src/components/Routes';
 
 import {
-  API_DOMAIN,
+  APP_DOMAIN,
   API_REDIRECT as redirect_uri,
   API_SCOPE as scope,
   ACCESS_KEY as client_id
@@ -28,8 +28,8 @@ export default class Signin extends Component {
         <div className={style.form}>
           <div className={style.signin}>
             <span>Login or confirm your authorization on the site</span>{' '}
-            <a href={API_DOMAIN} target='_blank'>
-              {API_DOMAIN}
+            <a href={APP_DOMAIN} target='_blank'>
+              {APP_DOMAIN}
             </a>
             <div className={style.button}>
               <a

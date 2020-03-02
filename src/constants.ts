@@ -1,5 +1,6 @@
 export const HOST: string = process.env.HOST || '';
 export const PORT: string = process.env.PORT || '';
+export const APP_DOMAIN: string = process.env.APP_DOMAIN || '';
 export const APP_TOKEN: string = process.env.APP_TOKEN || '';
 export const API_DOMAIN: string = process.env.API_DOMAIN || '';
 export const API_REDIRECT: string = process.env.API_REDIRECT || '';

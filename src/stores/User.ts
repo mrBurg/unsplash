@@ -1,16 +1,27 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 import { UserApi } from '../apis';
+import AuthStore from './Auth';
 
 export default class UserStore {
   @observable
   public user: any = null;
 
-  constructor(private _userApi: UserApi) {}
+  constructor(private _authStore: AuthStore, private _userApi: UserApi) {}
 
-  public async fetchUser(): Promise<boolean | void> {
-    const userData = await this._userApi.fetchUser();
+  @action
+  public async fetchUser(): Promise<boolean | null | any> {
+    let { token } = this._authStore;
 
-    console.info(userData);
+    if (token) {
+      const userData = await this._userApi.fetchUser(token);
+
+      if (userData) {
+        console.info(this);
+        // this.user.set(userData);
+      }
+    }
+
+    return null;
   }
 }

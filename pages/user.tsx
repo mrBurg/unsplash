@@ -1,46 +1,50 @@
 import { Component, ReactElement } from 'react';
 import { inject, observer } from 'mobx-react';
+import { toJS } from 'mobx';
 
 import { IComponentProps, IComponentState } from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';
 import Preloader from './../src/components/Preloader';
 
 interface IUserProps extends IComponentProps {
-  user: any;
+  userStore: any;
+}
+
+interface IUserState extends IComponentState {
+  userData: any;
 }
 
 @inject(STORE_IDS.USER)
 @observer
-class User extends Component<IUserProps, IComponentState> {
-  public state: IComponentState = {};
-
-  /* public static async getDerivedStateFromProps(props: any, state: any) {
-    let response = await props.user.fetchUser();
-
-    console.info(response);
-
-    return {
-      ...state
-    };
-  } */
+class User extends Component<IUserProps, IUserState> {
+  public state: IUserState = {
+    userData: null
+  };
 
   public componentDidMount(): void {
-    // let { user } = this.props;
-    // user.fetchUser();
+    let { userStore } = this.props;
+
+    userStore.fetchUser();
+
+    /*userStore.fetchUser((userData: IUserData) => {
+      this.setState({
+        userData
+      });
+    }); */
+  }
+
+  public componentDidUpdate(): void {
+    console.info(this.props.userStore.user);
+    console.info(toJS(this.props.userStore.user));
   }
 
   public render(): ReactElement {
-    console.info(this.state, 'User State');
+    let { userStore } = this.props;
 
-    let { user } = this.props;
-
-    console.info(user, 'Page User');
-
-    if (user) {
+    if (userStore.user) {
       return (
         <>
           <h1>Page User</h1>
-          <button onClick={this.props.user.fetchUser}>GetUser</button>
         </>
       );
     }

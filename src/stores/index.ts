@@ -22,7 +22,7 @@ const authApi = new AuthApi();
 const userApi = new UserApi();
 
 const authStore = new AuthStore(authApi);
-const userStore = new UserStore(userApi);
+const userStore = new UserStore(authStore, userApi);
 const counterStore = new Counter();
 
 let stores: IStores | null = null;
