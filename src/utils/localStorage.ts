@@ -1,7 +1,5 @@
 import { isBrowser } from './environment';
 
-type TFromLocalStorage = string | null;
-
 export async function setToLocalStorage(
   key: string,
   values: string
@@ -11,9 +9,9 @@ export async function setToLocalStorage(
   }
 }
 
-export function getFromLocalStorage(key?: string): TFromLocalStorage {
+export function getFromLocalStorage(key?: string): string | null {
   if (isBrowser) {
-    return window.localStorage.getItem(key || '');
+    return window.localStorage.getItem(key!);
   }
 
   return null;

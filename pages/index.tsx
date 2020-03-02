@@ -18,9 +18,9 @@ class Index extends Component<IIndexProps> {
     let { authStore, counterStore } = this.props;
 
     let { value, increase, decrease } = counterStore;
-    let { token } = authStore;
+    let { hasToken } = authStore;
 
-    if (token) {
+    if (hasToken) {
       return (
         <div className={style.content}>
           <p className='result'>{value}</p>

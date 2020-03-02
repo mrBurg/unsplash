@@ -15,13 +15,13 @@ import Nav from './../Nav';
 export class Header extends Component<IComponentProps> {
   public render(): ReactElement {
     let {
-      authStore: { token }
+      authStore: { hasToken }
     } = this.props;
 
     return (
       <header className={style.header}>
         <Logo />
-        {token && <Search />}
+        {hasToken && <Search />}
         <Nav />
       </header>
     );

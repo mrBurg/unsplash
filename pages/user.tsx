@@ -1,6 +1,5 @@
 import { Component, ReactElement } from 'react';
 import { inject, observer } from 'mobx-react';
-import { toJS } from 'mobx';
 
 import { IComponentProps, IComponentState } from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';

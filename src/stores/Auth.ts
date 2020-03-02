@@ -10,11 +10,9 @@ import {
 import { URLS } from '../components/Routes';
 import { AuthApi } from '../apis';
 
-export type TToken = string | null;
-
 export default class AuthStore {
   @observable
-  public token: TToken = null;
+  public token: string | null = null;
 
   constructor(private _authApi: AuthApi) {}
 
@@ -52,9 +50,7 @@ export default class AuthStore {
     this.token = null;
   }
 
-  public get hasToken(): TToken {
-    this.readToken();
-
-    return this.token;
+  public get hasToken(): boolean {
+    return this.token ? true : false;
   }
 }
