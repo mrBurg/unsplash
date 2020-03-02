@@ -10,35 +10,29 @@ interface IUserProps extends IComponentProps {
   userStore: any;
 }
 
-interface IUserState extends IComponentState {
-  userData: any;
-}
-
 @inject(STORE_IDS.USER)
 @observer
-class User extends Component<IUserProps, IUserState> {
-  public state: IUserState = {
-    userData: null
-  };
+class User extends Component<IUserProps, IComponentState> {
+  public state: IComponentState = {};
 
   public componentDidMount(): void {
-    // let { userStore } = this.props;
-    let { userData } = this.state;
+    let { userStore } = this.props;
 
-    console.info(this.props);
+    let { user } = userStore;
 
-    if (!userData) {
-      // userStore.fetchUser();
-      // this.setState({ ...toJS(this.props.userStore.user) });
+    // console.info(this.props.userStore.user);
+
+    if (!user) {
+      userStore.fetchUser();
     }
   }
 
   public render(): ReactElement {
     let { userStore } = this.props;
 
-    console.info(this.state);
+    let { user } = userStore;
 
-    if (userStore.user) {
+    if (user) {
       return (
         <>
           <h1>Page User</h1>

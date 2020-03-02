@@ -1,6 +1,9 @@
 import { APP_DOMAIN, API_DOMAIN } from '../constants';
-import { IQueryData } from '../apis/RequestApi';
 import { jsonToQueryString } from '.';
+
+export interface IQueryData {
+  [key: string]: any;
+}
 
 const makePath = (
   domain: string,

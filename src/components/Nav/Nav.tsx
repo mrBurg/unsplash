@@ -35,9 +35,7 @@ const Routes: Function = ({ hasToken }: IComponentState): Array<TLink> =>
       if (isHidden) return null;
 
       if (isProtected) {
-        if (hasToken) {
-          return <NavLink key={index} {...linkData} />;
-        } else return null;
+        return hasToken ? <NavLink key={index} {...linkData} /> : null;
       }
 
       return <NavLink key={index} {...linkData} />;
@@ -48,11 +46,13 @@ const Routes: Function = ({ hasToken }: IComponentState): Array<TLink> =>
 @observer
 export class Nav extends Component<IComponentProps> {
   public render(): ReactElement {
-    let { authStore } = this.props;
+    let {
+      authStore: { hasToken }
+    } = this.props;
 
     return (
       <div className={style.nav}>
-        <Routes {...authStore} />
+        <Routes hasToken={hasToken} />
       </div>
     );
   }

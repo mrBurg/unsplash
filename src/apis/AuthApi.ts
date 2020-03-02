@@ -1,5 +1,4 @@
-import Router from 'next/router';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import {
   ACCESS_KEY as client_id,
@@ -26,45 +25,31 @@ export interface IresponseParams {
 }
 
 export class AuthApi {
-  public async fetchToken(): Promise<IresponseParams | null> {
-    let {
-      query: { code }
-    } = Router;
+  public async fetchToken(code: string): Promise<IresponseParams | null> {
+    let url: string = makeUrl(`${URLS.OAUTH}/token`);
 
-    if (code) {
-      console.log(
-        `%c query.code: %c ${code} `,
-        'background: #0f0; color: #000',
-        'background: #fff; color: #000'
-      );
+    let requestData: IrequestData = {
+      client_id,
+      client_secret,
+      redirect_uri,
+      code,
+      grant_type: 'authorization_code'
+    };
 
-      let url: string = makeUrl(`${URLS.OAUTH}/token`);
+    let requestConfig: AxiosRequestConfig = {
+      method: 'post',
+      url,
+      data: requestData
+    };
 
-      let requestData: IrequestData = {
-        client_id,
-        client_secret,
-        redirect_uri,
-        code,
-        grant_type: 'authorization_code'
-      };
+    try {
+      const response: AxiosResponse = await axios(requestConfig);
 
-      let requestConfig: AxiosRequestConfig = {
-        method: 'post',
-        url,
-        data: requestData
-      };
+      return response.data;
+    } catch (error) {
+      console.info(error);
 
-      try {
-        const response = await axios(requestConfig);
-
-        return response.data;
-      } catch (error) {
-        console.info(error);
-
-        return null;
-      }
+      return null;
     }
-
-    return null;
   }
 }

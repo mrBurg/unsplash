@@ -7,31 +7,18 @@ import { IComponentProps } from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';
 import Preloader from './../src/components/Preloader';
 
-interface IIndexProps extends IComponentProps {
-  counterStore?: any;
-}
-
-@inject(STORE_IDS.AUTH, STORE_IDS.COUNTER)
+@inject(STORE_IDS.AUTH)
 @observer
-class Index extends Component<IIndexProps> {
+class Index extends Component<IComponentProps> {
   public render(): ReactElement {
-    let { authStore, counterStore } = this.props;
-
-    let { value, increase, decrease } = counterStore;
-    let { hasToken } = authStore;
+    let {
+      authStore: { hasToken }
+    } = this.props;
 
     if (hasToken) {
       return (
         <div className={style.content}>
-          <p className='result'>{value}</p>
-          <div className='buttons'>
-            <button className='button blue' onClick={decrease}>
-              &lt;&lt;&lt;
-            </button>
-            <button className='button green' onClick={increase}>
-              &gt;&gt;&gt;
-            </button>
-          </div>
+          <div className='buttons'></div>
           <style jsx>{`
             .result,
             .buttons {
