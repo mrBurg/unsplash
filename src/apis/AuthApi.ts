@@ -30,13 +30,14 @@ export class AuthApi {
     let {
       query: { code }
     } = Router;
-    console.log(
-      `%c query.code:%c ${query.code} `,
-      'background: #0f0; color: #000',
-      'background: #fff; color: #000'
-    );
 
     if (code) {
+      console.log(
+        `%c query.code: %c ${code} `,
+        'background: #0f0; color: #000',
+        'background: #fff; color: #000'
+      );
+
       let url: string = makeUrl(`${URLS.OAUTH}/token`);
 
       let requestData: IrequestData = {

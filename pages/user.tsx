@@ -1,4 +1,5 @@
 import { Component, ReactElement } from 'react';
+// import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
 
 import { IComponentProps, IComponentState } from '../src/interfaces';
@@ -21,24 +22,21 @@ class User extends Component<IUserProps, IUserState> {
   };
 
   public componentDidMount(): void {
-    let { userStore } = this.props;
+    // let { userStore } = this.props;
+    let { userData } = this.state;
 
-    userStore.fetchUser();
+    console.info(this.props);
 
-    /*userStore.fetchUser((userData: IUserData) => {
-      this.setState({
-        userData
-      });
-    }); */
-  }
-
-  public componentDidUpdate(): void {
-    console.info(this.props.userStore.user);
-    console.info(toJS(this.props.userStore.user));
+    if (!userData) {
+      // userStore.fetchUser();
+      // this.setState({ ...toJS(this.props.userStore.user) });
+    }
   }
 
   public render(): ReactElement {
     let { userStore } = this.props;
+
+    console.info(this.state);
 
     if (userStore.user) {
       return (

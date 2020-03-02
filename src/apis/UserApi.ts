@@ -16,13 +16,13 @@ export class UserApi {
         }
       };
 
-      const failFetch: Function = async () => {
+      /* const failFetch: Function = async () => {
         return { data: { ...requestConfig } };
-      };
+      }; */
 
       try {
-        // const response = await axios(requestConfig);
-        const response = await failFetch(requestConfig);
+        const response = await axios(requestConfig);
+        // const response = await failFetch(requestConfig);
 
         return response.data;
       } catch (error) {
