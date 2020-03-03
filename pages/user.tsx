@@ -18,16 +18,17 @@ class User extends Component<IUserProps, IComponentState> {
   public componentDidMount(): void {
     let { userStore } = this.props;
 
-    let { user } = userStore;
+    // let { user } = userStore;
 
-    // console.info(this.props.userStore.user);
+    userStore.fetchUser();
 
-    if (!user) {
+    /* if (!user) {
       userStore.fetchUser();
-    }
+    } */
   }
 
   public render(): ReactElement {
+    console.info(this.props.userStore.user);
     let { userStore } = this.props;
 
     let { user } = userStore;

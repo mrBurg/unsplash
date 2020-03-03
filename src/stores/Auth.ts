@@ -39,7 +39,9 @@ export default class AuthStore {
   }
 
   public readToken(): void {
-    this.token = getFromLocalStorage(APP_TOKEN);
+    const token = getFromLocalStorage(APP_TOKEN);
+
+    this.token = token;
   }
 
   public saveToken(token: string): void {
