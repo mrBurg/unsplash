@@ -18,7 +18,7 @@ class Index extends Component<IComponentProps> {
     if (hasToken) {
       return (
         <div className={style.content}>
-          <div className='buttons'></div>
+          <div className='buttons'>asd</div>
           <style jsx>{`
             .result,
             .buttons {

@@ -1,14 +1,14 @@
 import { Component, ReactElement } from 'react';
 import { NextComponentType } from 'next';
-import Link from 'next/link';
+// import Link from 'next/link';
 import Router from 'next/router';
 import { observer, inject } from 'mobx-react';
 
 import './../../scss/grid.scss';
 
 import { IComponentProps, IComponentState } from '../../interfaces';
-import { IRouter } from '../Routes/routes';
-import { allRoutes, URLS } from './../Routes';
+// import { IRouter } from '../Routes/routes';
+import { /* allRoutes */ URLS } from './../Routes';
 import { isBrowser } from '../../utils';
 import { STORE_IDS } from '../../stores';
 
@@ -74,7 +74,7 @@ export class Page extends Component<IPageComponentProps, IComponentState> {
     if (isCSR) {
       return (
         <>
-          <div className='nav'>
+          {/* <div className='nav'>
             {allRoutes.map((route: IRouter, index: number) => {
               let { href, alias, title } = route;
 
@@ -96,7 +96,7 @@ export class Page extends Component<IPageComponentProps, IComponentState> {
                 }
               `}
             </style>
-          </div>
+          </div> */}
           <Header />
           <Component {...pageProps} />
         </>

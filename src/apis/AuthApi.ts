@@ -16,7 +16,7 @@ interface IrequestData {
   grant_type: string;
 }
 
-export interface IresponseParams {
+interface IresponseParams {
   access_token: string;
   created_at: number;
   refresh_token: string;
@@ -43,9 +43,9 @@ export class AuthApi {
     };
 
     try {
-      const response: AxiosResponse = await axios(requestConfig);
+      const { data }: AxiosResponse = await axios(requestConfig);
 
-      return response.data;
+      return data;
     } catch (error) {
       console.info(error);
 

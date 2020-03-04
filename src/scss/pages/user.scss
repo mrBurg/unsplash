@@ -1,0 +1,51 @@
+@import './../services/placeholders.scss';
+@import './../services/mixins.scss';
+
+.container {
+  align-items: center;
+  background: transparent url('/images/background.png') center / cover no-repeat;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.content {
+  @extend %box-shadow;
+  @include border;
+  @include padding-box(1.5em);
+
+  background-color: transparentize($white, 0.1);
+  border-radius: 0.5em;
+  min-width: $form-min-width;
+}
+
+.name {
+  font-size: 2em;
+  text-align: center;
+}
+
+.infoBlock {
+  align-items: center;
+  display: flex;
+  margin-top: 1em;
+}
+
+.img {
+  vertical-align: middle;
+  width: 100%;
+}
+
+.info {
+  flex-grow: 1;
+  text-align: center;
+
+  &Data {
+    font-size: 1.3em;
+    margin: 0.5em 0;
+  }
+}
+
+.accent {
+  font-weight: bold;
+  color: $green;
+}

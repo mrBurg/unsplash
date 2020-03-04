@@ -1,10 +1,10 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+// import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { makeApiUrl } from '../utils';
-import { IUserData } from '../interfaces';
+// import { makeApiUrl } from '../utils';
+// import { IUserData } from '../interfaces';
 
-export class UserApi {
-  public async fetchUser(token: string): Promise<IUserData | null> {
+export class MainApi {
+  /* public async fetchUser(token: string): Promise<IUserData | null> {
     let url: string = makeApiUrl('/me');
 
     let requestConfig: AxiosRequestConfig = {
@@ -25,5 +25,5 @@ export class UserApi {
 
       return null;
     }
-  }
+  } */
 }

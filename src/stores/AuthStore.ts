@@ -1,13 +1,14 @@
 import Router from 'next/router';
 import { observable } from 'mobx';
 
-import { APP_TOKEN } from './../constants';
+import { APP_TOKEN } from '../constants';
 import { URLS } from '../components/Routes';
 import {
   getFromLocalStorage,
   setToLocalStorage,
   removeItemFromLocalStorage
 } from '../utils';
+
 import { AuthApi } from '../apis';
 
 export default class AuthStore {
@@ -16,7 +17,7 @@ export default class AuthStore {
 
   constructor(private _authApi: AuthApi) {}
 
-  public async fetchToken(): Promise<boolean> {
+  public async fetchToken(): Promise<boolean | void> {
     let {
       query: { code }
     } = Router;
@@ -35,7 +36,7 @@ export default class AuthStore {
       }
     }
 
-    return Router.push(URLS.SIGNIN);
+    Router.push(URLS.SIGNIN);
   }
 
   public readToken(): void {
