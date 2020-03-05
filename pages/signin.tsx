@@ -14,14 +14,21 @@ import {
   ACCESS_KEY as client_id
 } from './../src/constants';
 
-let queryData = {
-  client_id,
-  redirect_uri,
-  response_type: 'code',
-  scope
-};
+interface IqueryData {
+  client_id: string;
+  redirect_uri: string;
+  response_type: string;
+  scope: string;
+}
 
 export default class Signin extends Component {
+  private queryData: IqueryData = {
+    client_id,
+    redirect_uri,
+    response_type: 'code',
+    scope
+  };
+
   public render(): ReactElement {
     return (
       <div className={style.container}>
@@ -34,7 +41,7 @@ export default class Signin extends Component {
             <div className={style.button}>
               <a
                 className={ui.linkButton}
-                href={makeUrl(`${URLS.OAUTH}/authorize`, queryData)}
+                href={makeUrl(`${URLS.OAUTH}/authorize`, this.queryData)}
               >
                 Sign In
               </a>
