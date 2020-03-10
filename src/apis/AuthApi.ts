@@ -3,10 +3,10 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import {
   ACCESS_KEY as client_id,
   SECRET_KEY as client_secret,
-  API_REDIRECT as redirect_uri
+  API_REDIRECT as redirect_uri,
+  API_DOMAIN
 } from '../constants';
 import { URLS } from '../components/Routes';
-import { makeUrl } from '../utils';
 
 interface IrequestData {
   client_id: string;
@@ -26,8 +26,6 @@ interface IresponseParams {
 
 export class AuthApi {
   public async fetchToken(code: string): Promise<IresponseParams | null> {
-    let url: string = makeUrl(`${URLS.OAUTH}/token`);
-
     let requestData: IrequestData = {
       client_id,
       client_secret,
@@ -37,8 +35,9 @@ export class AuthApi {
     };
 
     let requestConfig: AxiosRequestConfig = {
+      url: `${URLS.OAUTH}/token`,
       method: 'post',
-      url,
+      baseURL: API_DOMAIN,
       data: requestData
     };
 

@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 import { APP_TOKEN } from '../constants';
 import { URLS } from '../components/Routes';
@@ -39,18 +39,21 @@ export default class AuthStore {
     Router.push(URLS.SIGNIN);
   }
 
+  @action
   public readToken(): void {
     const token = getFromLocalStorage(APP_TOKEN);
 
     this.token = token;
   }
 
+  @action
   public saveToken(token: string): void {
     setToLocalStorage(APP_TOKEN, token);
 
     this.token = token;
   }
 
+  @action
   public removeToken(): void {
     removeItemFromLocalStorage(APP_TOKEN);
 

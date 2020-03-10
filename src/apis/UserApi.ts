@@ -1,15 +1,14 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { makeApiUrl } from '../utils';
 import { IUserData } from '../interfaces';
+import { API_DOMAIN } from '../constants';
 
 export class UserApi {
   public async fetchUser(token: string): Promise<IUserData | null> {
-    let url: string = makeApiUrl('/me');
-
     let requestConfig: AxiosRequestConfig = {
+      url: '/me',
       method: 'get',
-      url,
+      baseURL: API_DOMAIN,
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'

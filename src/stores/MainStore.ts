@@ -1,26 +1,43 @@
-// import { observable, toJS } from 'mobx';
+import { observable, toJS, computed } from 'mobx';
 
 import { MainApi } from '../apis';
 import AuthStore from './AuthStore';
-// import { IUserData } from '../interfaces';
+import { IPhotosData } from '../interfaces';
+import { IphotosParams, PHOTOS_ORDERS } from '../apis/MainApi';
 
 export default class MainStore {
-  // @observable user: IUserData | null = null;
-  constructor(private _authStore: AuthStore, private _mainApi: MainApi) {
-    console.info(this._authStore, this._mainApi);
-  }
-  /* public async fetchUser(callBack: Function): Promise<void> {
-    // let { token } = this._authStore;
+  @observable photos: IPhotosData | null = null;
+  @observable page: number = 1;
+  @observable per_page: number = 10;
+  @observable order_by: PHOTOS_ORDERS = PHOTOS_ORDERS.LATEST;
+
+  constructor(private _authStore: AuthStore, private _mainApi: MainApi) {}
+
+  public async fetchPhotos(callBack: Function): Promise<void> {
+    let { token } = this._authStore;
 
     if (token) {
-      const userData = await this._userApi.fetchUser(token);
+      const photosData = await this._mainApi.fetchPhotos(
+        token,
+        this.photosParams
+      );
 
-      this.user = userData;
+      this.photos = photosData;
 
-      callBack(toJS(this.user));
+      callBack(toJS(this.photos));
     }
-  } */
-  /* public get userData(): IUserData {
-    // return toJS(this.user!);
-  } */
+  }
+
+  @computed
+  public get photosParams(): IphotosParams {
+    return {
+      page: this.page,
+      per_page: this.per_page,
+      order_by: this.order_by
+    };
+  }
+
+  public get photosData(): IPhotosData {
+    return toJS(this.photos!);
+  }
 }

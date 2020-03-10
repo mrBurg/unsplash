@@ -3,57 +3,54 @@ import { inject, observer } from 'mobx-react';
 
 import style from './../src/scss/pages/index.scss';
 
-import { IComponentProps } from '../src/interfaces';
+import {
+  IComponentProps,
+  // IPhotosData,
+  IComponentState
+} from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';
-import Preloader from './../src/components/Preloader';
+// import Preloader from './../src/components/Preloader';
+import Photo from '../src/components/Photo';
 
-@inject(STORE_IDS.AUTH)
+interface IIndexProps extends IComponentProps {
+  mainStore: any;
+}
+
+interface IIndexState extends IComponentState {
+  name: string;
+  email: string;
+  profile_image: any;
+  numeric_id: number;
+  username: string;
+}
+
+@inject(STORE_IDS.MAIN)
 @observer
-class Index extends Component<IComponentProps> {
+class Index extends Component<IIndexProps, IIndexState> {
+  /* public componentDidMount(): void {
+    let { mainStore } = this.props;
+    mainStore.fetchPhotos((photosData: IPhotosData) => {
+      this.setState(state => {
+        return {
+          ...state,
+          ...photosData
+        };
+      });
+    });
+  } */
+
   public render(): ReactElement {
-    let {
-      authStore: { hasToken }
-    } = this.props;
+    /* if (this.state) {
+      console.info(this.state); */
 
-    if (hasToken) {
-      return (
-        <div className={style.content}>
-          <div className='buttons'>asd</div>
-          <style jsx>{`
-            .result,
-            .buttons {
-              margin-top: 1em;
-            }
+    return (
+      <div className={style.content}>
+        <Photo />
+      </div>
+    );
+    /* }
 
-            .result {
-              text-align: center;
-            }
-
-            .buttons {
-              display: flex;
-              justify-content: center;
-            }
-
-            .button {
-              border-radius: 0.5em;
-              color: #fff;
-              cursor: pointer;
-              padding: 0.5em;
-            }
-
-            .green {
-              background-color: green;
-            }
-
-            .blue {
-              background-color: blue;
-            }
-          `}</style>
-        </div>
-      );
-    }
-
-    return <Preloader />;
+    return <Preloader />; */
   }
 }
 

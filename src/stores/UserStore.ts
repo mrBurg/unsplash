@@ -1,4 +1,4 @@
-import { observable, toJS } from 'mobx';
+import { observable, toJS, action } from 'mobx';
 
 import { UserApi } from '../apis';
 import AuthStore from './AuthStore';
@@ -9,6 +9,7 @@ export default class UserStore {
 
   constructor(private _authStore: AuthStore, private _userApi: UserApi) {}
 
+  @action
   public async fetchUser(callBack: Function): Promise<void> {
     let { token } = this._authStore;
 
