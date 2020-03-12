@@ -3,17 +3,16 @@ import { observer, inject } from 'mobx-react';
 
 import style from './search.scss';
 
-import { IComponentProps, IComponentState } from '../../interfaces';
 import { STORE_IDS } from '../../stores';
 
-interface ISearchState extends IComponentState {
+interface ISearchState {
   background: string;
   isBrowser?: any;
 }
 
 @inject(STORE_IDS.AUTH)
 @observer
-export class Search extends Component<IComponentProps, ISearchState> {
+export class Search extends Component {
   public state: ISearchState = {
     background: style.blur
   };

@@ -3,15 +3,15 @@ import { inject, observer } from 'mobx-react';
 
 import style from './../src/scss/pages/user.scss';
 
-import { IComponentProps, IComponentState, IUserData } from '../src/interfaces';
+import { IUserData } from '../src/interfaces';
 import { STORE_IDS } from '../src/stores';
 import Preloader from './../src/components/Preloader';
 
-interface IUserProps extends IComponentProps {
+interface IUserProps {
   userStore: any;
 }
 
-interface IUserState extends IComponentState {
+interface IUserState {
   name: string;
   email: string;
   profile_image: any;

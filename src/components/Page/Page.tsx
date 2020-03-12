@@ -22,7 +22,7 @@ interface IPageComponentProps extends IComponentProps {
 
 @inject(STORE_IDS.AUTH)
 @observer
-export class Page extends Component<IPageComponentProps, IComponentState> {
+export class Page extends Component<IPageComponentProps> {
   public state: IComponentState = {};
 
   public static getDerivedStateFromProps(
