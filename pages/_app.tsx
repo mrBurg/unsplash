@@ -53,8 +53,7 @@ export default class App extends NextApp {
             #__next {
               display: flex;
               flex-flow: column nowrap;
-              height: 100vh;
-              width: 100vw;
+              flex-grow: 1;
             }
           `}
         </style>

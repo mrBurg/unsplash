@@ -14,7 +14,7 @@ interface Iurls {
   thumb?: string;
 }
 
-export interface IPhotosData {
+export interface IPhotoData {
   alt_description?: string;
   categories?: Array<any>;
   color?: string;
@@ -28,7 +28,7 @@ export interface IPhotosData {
   links?: Ilinks;
   promoted_at?: string;
   updated_at?: string;
-  urls?: Iurls;
+  urls: Iurls;
   user?: IUserData;
   width?: number;
 }

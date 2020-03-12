@@ -19,7 +19,7 @@ export class Search extends Component<IComponentProps, ISearchState> {
   };
 
   private changeInputState = (event: FocusEvent<HTMLInputElement>): void => {
-    let background: string = this.state.background;
+    let background: string;
 
     switch (event.type) {
       case 'focus':
@@ -28,6 +28,8 @@ export class Search extends Component<IComponentProps, ISearchState> {
       case 'blur':
         background = style.blur;
         break;
+      default:
+        background = this.state.background;
     }
 
     this.setState({
@@ -37,7 +39,7 @@ export class Search extends Component<IComponentProps, ISearchState> {
 
   public render(): ReactElement {
     return (
-      <div className={`${style.wrapper} ${this.state.background}`}>
+      <div className={`${style.search} ${this.state.background}`}>
         <button className={style.button}>
           <div className={style.icon}></div>
         </button>

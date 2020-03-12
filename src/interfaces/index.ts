@@ -1,3 +1,3 @@
 export * from './page';
 export * from './user';
-export * from './photos';
+export * from './photo';

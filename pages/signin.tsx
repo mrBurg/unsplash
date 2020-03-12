@@ -1,5 +1,5 @@
 import { Component, ReactElement } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 import ui from './../src/scss/ui.scss';
 import style from './../src/scss/pages/signin.scss';
@@ -31,7 +31,7 @@ export default class Signin extends Component {
 
   public render(): ReactElement {
     return (
-      <div className={style.container}>
+      <div className={style.page}>
         <div className={style.form}>
           <div className={style.signin}>
             <span>Login or confirm your authorization on the site</span>{' '}
@@ -48,12 +48,12 @@ export default class Signin extends Component {
             </div>
           </div>
 
-          <div className={style.signup}>
+          {/* <div className={style.signup}>
             <span>or</span>{' '}
             <Link href={URLS.SIGNUP}>
               <a>Sign Up</a>
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     );

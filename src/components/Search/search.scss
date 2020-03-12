@@ -1,13 +1,16 @@
 @import './../../scss/services/constants.scss';
+@import './../../scss/services/mixins.scss';
 
-.wrapper {
+.search {
+  @include padding-box(0.2em);
   border: 1px solid $dark-gray;
   border-radius: 1.2em;
   display: flex;
+  max-width: 30em;
   min-width: 30%;
-  padding: 0.2em;
   padding-right: 1em;
   transition: all 0.2s;
+  width: 100%;
 }
 
 .blur {
@@ -21,17 +24,13 @@
 .button {
   background-color: $clear;
   border: none;
-  border-radius: 50%;
   cursor: pointer;
-  height: 32px;
-  width: 32px;
 }
 
 .icon {
-  background-image: url('/images/icons_32x32.svg');
-  background-position: 0 0;
-  height: 100%;
-  width: 100%;
+  background: $clear url('/images/icons_32x32.svg') 0 0;
+  height: 32px;
+  width: 32px;
 }
 
 .input {

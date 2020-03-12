@@ -22,9 +22,11 @@ const NavLink: FunctionComponent<ILinkProps> = ({
   alias,
   title
 }: ILinkProps): ReactElement => (
-  <Link href={href} as={alias}>
-    <a className={style.link}>{title}</a>
-  </Link>
+  <li className={style.nav__item}>
+    <Link href={href} as={alias}>
+      <a className={style.link}>{title}</a>
+    </Link>
+  </li>
 );
 
 const Routes: Function = ({ hasToken }: IComponentState): Array<TLink> =>
@@ -51,9 +53,9 @@ export class Nav extends Component<IComponentProps> {
     } = this.props;
 
     return (
-      <div className={style.nav}>
+      <ul className={style.nav}>
         <Routes hasToken={hasToken} />
-      </div>
+      </ul>
     );
   }
 }

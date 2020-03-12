@@ -5,6 +5,7 @@ import Router from 'next/router';
 import { observer, inject } from 'mobx-react';
 
 import './../../scss/grid.scss';
+import style from './../Page/page.scss';
 
 import { IComponentProps, IComponentState } from '../../interfaces';
 // import { IRouter } from '../Routes/routes';
@@ -40,7 +41,7 @@ export class Page extends Component<IPageComponentProps, IComponentState> {
 
     if (
       router.route != URLS.SIGNIN &&
-      router.route != URLS.SIGNUP &&
+      // router.route != URLS.SIGNUP &&
       router.route != URLS.OAUTH
     ) {
       Router.push(URLS.SIGNIN);
@@ -98,7 +99,9 @@ export class Page extends Component<IPageComponentProps, IComponentState> {
             </style>
           </div> */}
           <Header />
-          <Component {...pageProps} />
+          <main className={style.content}>
+            <Component {...pageProps} />
+          </main>
         </>
       );
     }

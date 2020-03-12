@@ -1,3 +1,3 @@
 export { AuthApi } from './AuthApi';
-export { MainApi } from './MainApi';
+export { PhotosApi } from './PhotosApi';
 export { UserApi } from './UserApi';

@@ -1,56 +1,48 @@
 import { Component, ReactElement } from 'react';
 import { inject, observer } from 'mobx-react';
 
-import style from './../src/scss/pages/index.scss';
-
-import {
-  IComponentProps,
-  // IPhotosData,
-  IComponentState
-} from '../src/interfaces';
+import { IPhotoData } from '../src/interfaces';
+import PhotosStore from '../src/stores/PhotosStore';
 import { STORE_IDS } from '../src/stores';
-// import Preloader from './../src/components/Preloader';
-import Photo from '../src/components/Photo';
+import Photos from '../src/components/Photos';
+import Preloader from './../src/components/Preloader';
 
-interface IIndexProps extends IComponentProps {
-  mainStore: any;
+import photosData from './../src/components/Photos/photos.json';
+
+interface IIndexProps {
+  photosStore: PhotosStore;
 }
 
-interface IIndexState extends IComponentState {
-  name: string;
-  email: string;
-  profile_image: any;
-  numeric_id: number;
-  username: string;
-}
-
-@inject(STORE_IDS.MAIN)
+@inject(STORE_IDS.PHOTOS)
 @observer
-class Index extends Component<IIndexProps, IIndexState> {
-  /* public componentDidMount(): void {
-    let { mainStore } = this.props;
-    mainStore.fetchPhotos((photosData: IPhotosData) => {
+class Index extends Component<IIndexProps> {
+  public componentDidMount(): void {
+    /* let { photosStore } = this.props;
+    photosStore.fetchPhotos((photos: Array<IPhotoData>) => {
       this.setState(state => {
         return {
           ...state,
-          ...photosData
+          photos
         };
       });
+    }); */
+
+    let photos: Array<IPhotoData> = photosData;
+
+    this.setState(state => {
+      return {
+        ...state,
+        photos
+      };
     });
-  } */
+  }
 
   public render(): ReactElement {
-    /* if (this.state) {
-      console.info(this.state); */
+    if (this.state) {
+      return <Photos {...this.state} />;
+    }
 
-    return (
-      <div className={style.content}>
-        <Photo />
-      </div>
-    );
-    /* }
-
-    return <Preloader />; */
+    return <Preloader />;
   }
 }
 

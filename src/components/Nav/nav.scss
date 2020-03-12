@@ -1,13 +1,14 @@
 @import './../../scss/services/constants.scss';
 
 .nav {
-  align-items: center;
   display: flex;
-  flex-basis: 25%;
-  justify-content: end;
+  list-style: none;
+
+  &__item {
+    margin: 0 0.3em;
+  }
 }
 
 .link {
   font-size: 1.2em;
-  padding: 0.3em;
 }

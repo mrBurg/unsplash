@@ -10,7 +10,7 @@ export enum URLS {
   HOME = '/',
   SIGNIN = '/signin',
   USER = '/user',
-  SIGNUP = '/signup',
+  // SIGNUP = '/signup',
   LOGOUT = '/logout',
   OAUTH = '/oauth'
 }
@@ -28,11 +28,11 @@ export const routes: Array<IRouter> = [
     title: 'User',
     isProtected: true
   },
-  {
+  /* {
     href: URLS.SIGNUP,
     alias: 'signup',
     title: 'Signup'
-  },
+  }, */
   {
     href: URLS.LOGOUT,
     alias: 'logout',

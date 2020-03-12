@@ -20,9 +20,19 @@ export class Header extends Component<IComponentProps> {
 
     return (
       <header className={style.header}>
-        <Logo />
-        {hasToken && <Search />}
-        <Nav />
+        <div className={style.content}>
+          <div className={style.side}>
+            <Logo />
+          </div>
+          {hasToken && (
+            <div className={style.center}>
+              <Search />
+            </div>
+          )}
+          <div className={`${style.side} ${style.right}`}>
+            <Nav />
+          </div>
+        </div>
       </header>
     );
   }

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { IPhotosData } from '../interfaces';
+import { IPhotoData } from '../interfaces';
 import { API_DOMAIN } from '../constants';
 
 export enum PHOTOS_ORDERS {
@@ -15,11 +15,11 @@ export interface IphotosParams {
   order_by: PHOTOS_ORDERS;
 }
 
-export class MainApi {
+export class PhotosApi {
   public async fetchPhotos(
     token: string,
     params: IphotosParams
-  ): Promise<IPhotosData | null> {
+  ): Promise<Array<IPhotoData> | null> {
     let requestConfig: AxiosRequestConfig = {
       url: '/photos',
       method: 'get',

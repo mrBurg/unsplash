@@ -4,7 +4,7 @@ import {
   ACCESS_KEY as client_id,
   SECRET_KEY as client_secret,
   API_REDIRECT as redirect_uri,
-  API_DOMAIN
+  APP_DOMAIN
 } from '../constants';
 import { URLS } from '../components/Routes';
 
@@ -37,7 +37,7 @@ export class AuthApi {
     let requestConfig: AxiosRequestConfig = {
       url: `${URLS.OAUTH}/token`,
       method: 'post',
-      baseURL: API_DOMAIN,
+      baseURL: APP_DOMAIN,
       data: requestData
     };
 
