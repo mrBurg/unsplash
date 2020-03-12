@@ -13,9 +13,13 @@ interface IIndexProps {
   photosStore: PhotosStore;
 }
 
+interface IIndexState {
+  photos?: Array<IPhotoData>;
+}
+
 @inject(STORE_IDS.PHOTOS)
 @observer
-class Index extends Component<IIndexProps> {
+class Index extends Component<IIndexProps, IIndexState> {
   public componentDidMount(): void {
     /* let { photosStore } = this.props;
     photosStore.fetchPhotos((photos: Array<IPhotoData>) => {
@@ -27,19 +31,23 @@ class Index extends Component<IIndexProps> {
       });
     }); */
 
-    let photos: Array<IPhotoData> = photosData;
+    setTimeout((): void => {
+      let photos: Array<IPhotoData> = photosData;
 
-    this.setState(state => {
-      return {
-        ...state,
-        photos
-      };
-    });
+      this.setState((state: IIndexState) => {
+        return {
+          ...state,
+          photos
+        };
+      });
+    }, 1000);
   }
 
   public render(): ReactElement {
     if (this.state) {
-      return <Photos {...this.state} />;
+      let { photos } = this.state;
+
+      return <Photos photos={photos} />;
     }
 
     return <Preloader />;

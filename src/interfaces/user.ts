@@ -22,8 +22,8 @@ interface Itags {
 export interface IUserData {
   accepted_tos?: boolean;
   allow_messages?: boolean;
-  badge?: null;
-  bio?: null;
+  badge?: any;
+  bio?: any;
   confirmed?: boolean;
   downloads?: number;
   email?: string;
@@ -32,20 +32,20 @@ export interface IUserData {
   followers_count?: number;
   following_count?: number;
   id?: string;
-  instagram_username?: null;
-  last_name?: string;
+  instagram_username?: any;
+  last_name?: any;
   links?: Ilinks;
-  location?: null;
+  location?: any;
   name?: string;
   numeric_id?: number;
   photos?: Array<any>;
-  portfolio_url?: null;
+  portfolio_url?: any;
   profile_image?: Iprofile_image;
   tags?: Itags;
   total_collections?: number;
   total_likes?: number;
   total_photos?: number;
-  twitter_username?: null;
+  twitter_username?: any;
   uid?: string;
   unlimited_uploads?: boolean;
   updated_at?: string;

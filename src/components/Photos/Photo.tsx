@@ -1,33 +1,46 @@
-import { Component, ReactElement } from 'react';
+import { FunctionComponent, ReactElement, MouseEvent } from 'react';
 
 import style from './photo.scss';
 
 import { IPhotoData } from '../../interfaces';
 
-export class Photo extends Component<IPhotoData> {
-  render(): ReactElement {
-    let {
-      description,
-      urls: { small },
-      liked_by_user
-    } = this.props;
-
-    let styleButtonActive: string = liked_by_user
-      ? ` ${style.button_active}`
-      : '';
-
-    return (
-      <figure className={style.figure}>
-        <img src={small} />
-        <figcaption className={style.figcaption}>
-          <div className={style.buttons}>
-            <button className={`${style.button}${styleButtonActive}`} />
-          </div>
-          {description && (
-            <div className={style.description}>{description}</div>
-          )}
-        </figcaption>
-      </figure>
-    );
-  }
+interface IPhotoProps extends IPhotoData {
+  showPhotoDetails: (photoData: IPhotoData) => void;
+  likePhoto: (photoData: IPhotoData) => void;
 }
+
+export const Photo: FunctionComponent<IPhotoProps> = (
+  props: IPhotoProps
+): ReactElement => {
+  let { showPhotoDetails, likePhoto, description, urls, liked_by_user } = props;
+
+  let styleButtonActive: string = liked_by_user
+    ? ` ${style.button_active}`
+    : '';
+
+  return (
+    <figure className={style.figure}>
+      <img src={urls!.small} />
+      <figcaption
+        className={style.figcaption}
+        onClick={(event: MouseEvent<Element>): void => {
+          event.stopPropagation();
+
+          showPhotoDetails(props);
+        }}
+      >
+        <div className={style.buttons}>
+          <button
+            className={`${style.button}${styleButtonActive}`}
+            onClick={(event: MouseEvent<Element>): void => {
+              event.stopPropagation();
+
+              likePhoto(props);
+            }}
+          />
+        </div>
+        {description && <div className={style.description}>{description}</div>}
+      </figcaption>
+    </figure>
+  );
+};

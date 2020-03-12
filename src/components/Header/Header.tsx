@@ -5,7 +5,6 @@ import style from './header.scss';
 
 import { IComponentProps } from '../../interfaces';
 import { STORE_IDS } from '../../stores';
-
 import Logo from './../Logo';
 import Search from './../Search';
 import Nav from './../Nav';

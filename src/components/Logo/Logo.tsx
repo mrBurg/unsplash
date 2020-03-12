@@ -4,7 +4,6 @@ import Link from 'next/link';
 import style from './logo.scss';
 
 import LogoImg from './../../images/svg/logo.svg';
-
 import { URLS } from '../Routes';
 
 export const Logo: FunctionComponent = (): ReactElement => (
