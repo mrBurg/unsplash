@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 import { APP_TOKEN } from '../constants';
 import { URLS } from '../components/Routes';
@@ -17,6 +17,7 @@ export default class AuthStore {
 
   constructor(private _authApi: AuthApi) {}
 
+  @action
   public async fetchToken(): Promise<boolean | void> {
     let {
       query: { code }
@@ -60,6 +61,7 @@ export default class AuthStore {
     this.token = null;
   }
 
+  @computed
   public get hasToken(): boolean {
     return this.token ? true : false;
   }

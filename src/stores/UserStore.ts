@@ -1,11 +1,12 @@
-import { observable, toJS, action } from 'mobx';
+import { observable, toJS, action, computed } from 'mobx';
 
 import { UserApi } from '../apis';
 import AuthStore from './AuthStore';
 import { IUserData } from '../interfaces';
 
 export default class UserStore {
-  @observable user: IUserData | null = null;
+  @observable
+  public user: IUserData | null = null;
 
   constructor(private _authStore: AuthStore, private _userApi: UserApi) {}
 
@@ -22,6 +23,7 @@ export default class UserStore {
     }
   }
 
+  @computed
   public get userData(): IUserData {
     return toJS(this.user!);
   }

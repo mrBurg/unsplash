@@ -12,6 +12,7 @@ import { IRouter } from './../Routes/routes';
 type TLink = ReactElement | null;
 
 interface ILinkProps {
+  key: any;
   href: string;
   alias: string;
   title: string;
@@ -21,11 +22,12 @@ interface ILinkProps {
 @observer
 export class Nav extends Component<IComponentProps> {
   private navLink: FunctionComponent<ILinkProps> = ({
+    key,
     href,
     alias,
     title
   }: ILinkProps): ReactElement => (
-    <li className={style.nav__item}>
+    <li key={key} className={style.nav__item}>
       <Link href={href} as={alias}>
         <a className={style.link}>{title}</a>
       </Link>
@@ -44,19 +46,15 @@ export class Nav extends Component<IComponentProps> {
         if (isHidden) return null;
 
         if (isProtected) {
-          return hasToken ? <this.navLink key={index} {...linkData} /> : null;
+          return hasToken ? this.navLink({ key: index, ...linkData }) : null;
         }
 
-        return <this.navLink key={index} {...linkData} />;
+        return this.navLink({ key: index, ...linkData });
       }
     );
   };
 
   public render(): ReactElement {
-    return (
-      <ul className={style.nav}>
-        <this.routes />
-      </ul>
-    );
+    return <ul className={style.nav}>{this.routes()}</ul>;
   }
 }

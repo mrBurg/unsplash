@@ -1,34 +1,23 @@
 import { Component, ReactElement } from 'react';
-// import dynamic from 'next/dynamic';
 
 import style from './photos.scss';
 
 import { IPhotoData } from '../../interfaces';
+import { IPhotosStore } from '../../stores/PhotosStore';
+import { getPhotoIndex } from '../../utils';
 import { Photo } from './Photo';
-import { searchPhotoData } from '../../utils';
-
-interface IPhotos {
-  photos?: Array<IPhotoData>;
-}
 
 interface IlikePhoto {
-  (photoData: IPhotoData): void;
+  (photoID: string): void;
 }
 
-export class Photos extends Component<IPhotos> {
-  public state: IPhotos = {};
-
-  public static getDerivedStateFromProps(props: any, state: any) {
-    return {
-      ...state,
-      ...props
-    };
-  }
-
+export class Photos extends Component<IPhotosStore> {
   private renderPhotos: Function = (): Array<ReactElement> => {
-    let { photos } = this.state;
+    let {
+      photosStore: { photosData }
+    } = this.props;
 
-    return photos!.map(
+    return photosData.map(
       (photoData: IPhotoData, index: number): ReactElement => (
         <Photo
           key={index}
@@ -40,10 +29,17 @@ export class Photos extends Component<IPhotos> {
     );
   };
 
-  private likePhoto: IlikePhoto = (photoData: IPhotoData): void => {
-    let { photos } = this.state;
-    let { id } = photoData;
-    console.info(searchPhotoData(photos!, id));
+  private likePhoto: IlikePhoto = (photoID: string): void => {
+    let {
+      photosStore,
+      photosStore: { photosData }
+    } = this.props;
+
+    let photoDataIndex: number = getPhotoIndex(photosData, photoID);
+    let photoData = photosData[photoDataIndex];
+
+    photoData.liked_by_user = !photoData.liked_by_user;
+    photosStore.photosData = photosData;
   };
 
   private showPhotoDetails(photoData: IPhotoData): void {
@@ -53,25 +49,7 @@ export class Photos extends Component<IPhotos> {
     console.info(photoData);
   }
 
-  public componentDidMount() {
-    console.info('componentDidMount');
-  }
-
-  public componentDidUpdate(prevProps: any, prevState: any) {
-    console.info('componentDidUpdate');
-    console.info(prevProps);
-    console.info(prevState);
-  }
-
-  public componentDidCatch() {
-    console.info('componentDidCatch');
-  }
-
   public render(): ReactElement {
-    return (
-      <div className={style.photos}>
-        <this.renderPhotos />
-      </div>
-    );
+    return <div className={style.photos}>{this.renderPhotos()}</div>;
   }
 }

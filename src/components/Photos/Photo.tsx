@@ -6,13 +6,20 @@ import { IPhotoData } from '../../interfaces';
 
 interface IPhotoProps extends IPhotoData {
   showPhotoDetails: (photoData: IPhotoData) => void;
-  likePhoto: (photoData: IPhotoData) => void;
+  likePhoto: (photoID: string) => void;
 }
 
 export const Photo: FunctionComponent<IPhotoProps> = (
   props: IPhotoProps
 ): ReactElement => {
-  let { showPhotoDetails, likePhoto, description, urls, liked_by_user } = props;
+  let {
+    id,
+    showPhotoDetails,
+    likePhoto,
+    description,
+    urls,
+    liked_by_user
+  } = props;
 
   let styleButtonActive: string = liked_by_user
     ? ` ${style.button_active}`
@@ -23,9 +30,7 @@ export const Photo: FunctionComponent<IPhotoProps> = (
       <img src={urls!.small} />
       <figcaption
         className={style.figcaption}
-        onClick={(event: MouseEvent<Element>): void => {
-          event.stopPropagation();
-
+        onClick={(): void => {
           showPhotoDetails(props);
         }}
       >
@@ -35,7 +40,7 @@ export const Photo: FunctionComponent<IPhotoProps> = (
             onClick={(event: MouseEvent<Element>): void => {
               event.stopPropagation();
 
-              likePhoto(props);
+              likePhoto(id);
             }}
           />
         </div>
