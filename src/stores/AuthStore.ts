@@ -11,6 +11,10 @@ import {
 
 import { AuthApi } from '../apis';
 
+export interface IAuthStore {
+  authStore?: any;
+}
+
 export default class AuthStore {
   @observable
   public token: string | null = null;

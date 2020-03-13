@@ -3,15 +3,17 @@ import { observer, inject } from 'mobx-react';
 
 import style from './header.scss';
 
-import { IComponentProps } from '../../interfaces';
+import { IAuthStore } from '../../stores/AuthStore';
 import { STORE_IDS } from '../../stores';
 import Logo from './../Logo';
 import Search from './../Search';
 import Nav from './../Nav';
+import Router from 'next/router';
+import { URLS } from '../Routes';
 
 @inject(STORE_IDS.AUTH)
 @observer
-export class Header extends Component<IComponentProps> {
+export class Header extends Component<IAuthStore> {
   public render(): ReactElement {
     let {
       authStore: { hasToken }
@@ -23,13 +25,13 @@ export class Header extends Component<IComponentProps> {
           <div className={style.side}>
             <Logo />
           </div>
-          {hasToken && (
+          {hasToken && Router.route == URLS.HOME && (
             <div className={style.center}>
               <Search />
             </div>
           )}
           <div className={`${style.side} ${style.right}`}>
-            <Nav />
+            <Nav {...this.props} />
           </div>
         </div>
       </header>

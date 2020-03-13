@@ -1,11 +1,9 @@
 import { ReactElement, Component, FunctionComponent } from 'react';
 import Link from 'next/link';
-import { inject, observer } from 'mobx-react';
 
 import style from './nav.scss';
 
-import { IComponentProps } from '../../interfaces';
-import { STORE_IDS } from '../../stores';
+import { IAuthStore } from '../../stores/AuthStore';
 import { routes } from '../Routes';
 import { IRouter } from './../Routes/routes';
 
@@ -18,9 +16,7 @@ interface ILinkProps {
   title: string;
 }
 
-@inject(STORE_IDS.AUTH)
-@observer
-export class Nav extends Component<IComponentProps> {
+export class Nav extends Component<IAuthStore> {
   private navLink: FunctionComponent<ILinkProps> = ({
     key,
     href,

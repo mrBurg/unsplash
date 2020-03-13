@@ -1,4 +1,5 @@
-import { Component, ReactElement } from 'react';
+import { Component, ReactElement, ComponentType } from 'react';
+import dynamic from 'next/dynamic';
 
 import style from './photos.scss';
 
@@ -11,7 +12,27 @@ interface IlikePhoto {
   (photoID: string): void;
 }
 
+interface IshowPhotoDetails {
+  (photoData: IPhotoData): void;
+}
+
+interface IclosePhotoDetails {
+  (): void;
+}
+
+interface IPhotosState {
+  popupData: IPhotoData | null;
+}
+
+let DynamicComponent: ComponentType<any> = dynamic((): any =>
+  import('./PhotoDetails')
+);
+
 export class Photos extends Component<IPhotosStore> {
+  public state: IPhotosState = {
+    popupData: null
+  };
+
   private renderPhotos: Function = (): Array<ReactElement> => {
     let {
       photosStore: { photosData }
@@ -42,14 +63,39 @@ export class Photos extends Component<IPhotosStore> {
     photosStore.photosData = photosData;
   };
 
-  private showPhotoDetails(photoData: IPhotoData): void {
-    // const DynamicComponent = dynamic((): any => import('./PhotoDetails'));
+  private showPhotoDetails: IshowPhotoDetails = (
+    photoData: IPhotoData
+  ): void => {
+    this.setState((state: IPhotosState) => {
+      return {
+        ...state,
+        popupData: photoData
+      };
+    });
+  };
 
-    // console.info(DynamicComponent);
-    console.info(photoData);
-  }
+  private closePhotoDetails: IclosePhotoDetails = (): void => {
+    this.setState((state: IPhotosState) => {
+      return {
+        ...state,
+        popupData: null
+      };
+    });
+  };
 
   public render(): ReactElement {
-    return <div className={style.photos}>{this.renderPhotos()}</div>;
+    let { popupData } = this.state;
+
+    return (
+      <div className={style.photos}>
+        {this.renderPhotos()}
+        {popupData && (
+          <DynamicComponent
+            {...popupData}
+            closePopup={this.closePhotoDetails}
+          />
+        )}
+      </div>
+    );
   }
 }

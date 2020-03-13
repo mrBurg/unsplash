@@ -5,7 +5,7 @@ import AuthStore from './AuthStore';
 import { IPhotoData } from '../interfaces';
 import { IphotosParams, PHOTOS_ORDERS } from '../apis/PhotosApi';
 
-import photosData from './photos.json';
+// import photosData from './photos.json';
 
 export interface IPhotosStore {
   photosStore: PhotosStore;
@@ -30,10 +30,10 @@ export default class PhotosStore {
     let { token } = this._authStore;
 
     if (token) {
-      /* const photosData = await this._photosApi.fetchPhotos(
+      const photosData = await this._photosApi.fetchPhotos(
         token,
         this.photosParams
-      ); */
+      );
 
       this.photos = photosData;
 

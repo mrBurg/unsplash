@@ -7,7 +7,7 @@ import { observer, inject } from 'mobx-react';
 import './../../scss/grid.scss';
 import style from './../Page/page.scss';
 
-import { IComponentProps, IComponentState } from '../../interfaces';
+import { IComponentProps } from '../../interfaces';
 // import { IRouter } from '../Routes/routes';
 import { /* allRoutes */ URLS } from './../Routes';
 import { isBrowser } from '../../utils';
@@ -15,20 +15,22 @@ import { STORE_IDS } from '../../stores';
 
 import Header from '../Header';
 import Preloader from '../Preloader';
+import { IAuthStore } from '../../stores/AuthStore';
 
-interface IPageComponentProps extends IComponentProps {
+interface IPageProps extends IAuthStore, IComponentProps {
   Component: NextComponentType;
+}
+
+export interface IPageState {
+  isCSR?: boolean;
 }
 
 @inject(STORE_IDS.AUTH)
 @observer
-export class Page extends Component<IPageComponentProps> {
-  public state: IComponentState = {};
+export class Page extends Component<IPageProps> {
+  public state: IPageState = {};
 
-  public static getDerivedStateFromProps(
-    props: IComponentProps,
-    state: IComponentState
-  ) {
+  public static getDerivedStateFromProps(props: IAuthStore, state: IPageState) {
     props.authStore.readToken();
 
     return {
@@ -51,7 +53,7 @@ export class Page extends Component<IPageComponentProps> {
   public componentDidMount(): void {
     console.info('componentDidMount');
 
-    this.setState((state: IComponentState) => {
+    this.setState((state: IPageState) => {
       return {
         ...state,
         isCSR: isBrowser
@@ -98,7 +100,7 @@ export class Page extends Component<IPageComponentProps> {
               `}
             </style>
           </div> */}
-          <Header />
+          <Header {...pageProps} />
           <main className={style.content}>
             <Component {...pageProps} />
           </main>
