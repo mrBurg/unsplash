@@ -64,6 +64,7 @@ export class Page extends Component<IPageProps> {
   public componentDidUpdate(): void {
     console.info('componentDidUpdate');
     let { authStore } = this.props;
+    authStore.hasToken;
 
     if (!authStore.hasToken) {
       this.redirectToSignin();

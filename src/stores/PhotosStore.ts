@@ -17,9 +17,9 @@ export default class PhotosStore {
   @observable
   public photos: Tphotos = null;
   @observable
-  public page: number = 2;
+  public page: number = 1;
   @observable
-  public per_page: number = 30;
+  public per_page: number = 20;
   @observable
   public order_by: PHOTOS_ORDERS = PHOTOS_ORDERS.LATEST;
   //@ts-ignore

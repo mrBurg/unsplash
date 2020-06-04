@@ -9,6 +9,11 @@
 .content {
   display: flex;
   justify-content: space-between;
+
+  @include respond(sm) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .center,
