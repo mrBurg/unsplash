@@ -11,7 +11,7 @@ import {
   APP_DOMAIN,
   API_REDIRECT as redirect_uri,
   API_SCOPE as scope,
-  ACCESS_KEY as client_id
+  ACCESS_KEY as client_id,
 } from './../src/constants';
 
 interface IqueryData {
@@ -26,7 +26,7 @@ export default class Signin extends Component {
     client_id,
     redirect_uri,
     response_type: 'code',
-    scope
+    scope,
   };
 
   public render(): ReactElement {
