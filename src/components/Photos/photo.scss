@@ -4,8 +4,12 @@
 
 .figure {
   position: relative;
-  margin-bottom: 1.5em;
-  width: 12.5%;
+  margin: 0.5em;
+  width: 12%;
+
+  @include respond(sm) {
+    width: 40%;
+  }
 
   img {
     vertical-align: middle;
